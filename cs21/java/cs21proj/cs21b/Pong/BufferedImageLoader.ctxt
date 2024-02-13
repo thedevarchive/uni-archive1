@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=pathRelativeToThis
+comment0.target=java.awt.image.BufferedImage\ loadImage(java.lang.String)
+comment0.text=\n\ A\ method\ that\ will\ load\ the\ images.\ \n\ \n\ @param\ \ pathRelativetoThis\ \ \ the\ URL\ of\ the\ image\ to\ be\ used\ in\ the\ game\ \n\ @return\ \ img\ \ \ the\ loaded\ image\n
+numComments=1

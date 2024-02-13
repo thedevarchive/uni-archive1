@@ -1,0 +1,12 @@
+Is this a palindrome?
+madam
+Eve
+aBbA
+RACECAR
+AAZzaa
+12321
+Adam
+Madam, I'm Adam
+Madam, I'm Adam.
+A@123.A
+123

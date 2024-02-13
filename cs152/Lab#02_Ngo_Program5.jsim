@@ -1,0 +1,39 @@
+*I have not discussed the JSim language code in my program with anyone other than my instructor in this course.
+*I have not used JSim language code obtained from another student, or any unauthorized source, either modified or 
+*unmodified.
+*If any JSim language code or documentation used in my program was obtained from another source, 
+*such as a text book or course notes, that has been clearly noted with a proper citation in the comments of my 
+*program.
+
+
+*F = !AB + !BC + !CA
+.include "nominal.jsim"
+.include "8clocks.jsim"
+
+MP1 vdd nclk1 x vdd PENH W=1u L=1u 
+MP2 vdd clk2 x vdd PENH W=1u L=1u
+MN1 x nclk1 a 0 NENH W=1u L=1u 
+MN2 a clk2 0 0 NENH W=1u L=1u 
+
+MP3 vdd nclk2 y vdd PENH W=1u L=1u
+MP4 vdd clk3 y vdd PENH W=1u L=1u 
+MN3 y nclk2 b 0 NENH W=1u L=1u 
+MN4 b clk3 0 0 NENH W=1u L=1u 
+
+MP5 vdd nclk3 z vdd PENH W=1u L=1u 
+MP6 vdd clk1 z vdd PENH W=1u L=1u 
+MN5 z nclk3 c 0 NENH W=1u L=1u 
+MN6 c clk1 0 0 NENH W=1u L=1u 
+
+MP7 vdd x out vdd PENH W=1u L=1u 
+MP8 vdd y out vdd PENH W=1u L=1u 
+MP9 vdd z out vdd PENH W=1u L=1u 
+MN7 out x d 0 NENH W=1u L=1u 
+MN8 d y e 0 NENH W=1u L=1u 
+MN9 e z 0 0 NENH W=1u L=1u 
+
+.tran 100ns
+.plot clk1
+.plot clk2
+.plot clk3
+.plot out

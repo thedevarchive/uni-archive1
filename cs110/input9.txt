@@ -1,0 +1,19 @@
+2
+
+avocado banana chico durian guava jackfruit lychee mango
+5
+durian
+lychee
+avocado
+coconut
+melon
+
+Caloocan Las-Pinas Makati Mandaluyong Manila Marikina Muntinlupa Pasig Quezon-City
+7
+Quezon-City
+Pasig
+Las-Pinas
+Taguig
+San-Juan
+Navotas
+Valenzuela

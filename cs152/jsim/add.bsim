@@ -1,0 +1,12 @@
+.include beta.uasm
+
+LD(R31, N, R0) 
+LD(R31, O, R1) 
+ADD(R0, R1, R2) 
+CMOVE(O, R3) 
+ADDC(R3, 4, R3) 
+ST(R2, 0, R3) 
+
+. = 0x200
+N: LONG(3)
+O: LONG(1) 

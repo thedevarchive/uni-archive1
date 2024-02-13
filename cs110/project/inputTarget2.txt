@@ -1,0 +1,4 @@
+insert 1 A
+insert 2 BC
+insert 5 DEF
+exit

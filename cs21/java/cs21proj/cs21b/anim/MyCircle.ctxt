@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=x\ y\ r\ c
+comment0.target=MyCircle(double,\ double,\ double,\ java.awt.Color)
+comment1.params=g2d\ reset
+comment1.target=void\ drawObject(java.awt.Graphics2D,\ java.awt.geom.AffineTransform)
+comment2.params=speed
+comment2.target=void\ incX(double)
+comment3.params=speed
+comment3.target=void\ incY(double)
+comment4.params=speed
+comment4.target=void\ decX(double)
+comment5.params=speed
+comment5.target=void\ decY(double)
+comment6.params=
+comment6.target=double\ getX()
+comment7.params=
+comment7.target=double\ getY()
+numComments=8

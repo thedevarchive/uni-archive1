@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.params=a1\ b1\ a2\ b2\ a3\ b3\ c
+comment0.target=Triangle(double,\ double,\ double,\ double,\ double,\ double,\ java.awt.Color)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Triangle.\ It\ takes\ in\ three\ points\ that\ will\ draw\ the\ triangle.\ \n\ \n\ @param\ \ a1\ \ \ x-coordinate\ of\ the\ first\ point\ of\ the\ triangle\ to\ be\ drawn\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ starting\ x-coordinate\ of\ the\ triangle\ that\ will\ be\ drawn\n\ @param\ \ b1\ \ \ y-coordinate\ of\ the\ first\ point\ of\ the\ triangle\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ starting\ y-coordinate\ of\ the\ triangle\ to\ be\ drawn\n\ @param\ \ a2\ \ \ x-coordinate\ of\ the\ second\ point\ of\ the\ triangle\n\ @param\ \ b2\ \ \ y-coordinate\ of\ the\ second\ point\n\ @param\ \ a3\ \ \ x-coordinate\ of\ the\ third\ point\n\ @param\ \ b3\ \ \ y-coordinate\ of\ the\ third\ point\n\ @param\ \ c\ \ \ \ the\ color\ that\ will\ be\ used\ to\ fill\ the\ triangle\ with\n
+comment1.params=a
+comment1.target=void\ incX(double)
+comment1.text=\n\ ADDITIONAL\ METHOD\:\ incX\n\ Added\ just\ to\ give\ horizontal\ movement\ to\ the\ Triangle\ instances.\ \n\ \n\ @param\ \ a\ \ \ change\ or\ step\ in\ the\ x-position\ of\ the\ triangle\n
+comment2.params=b
+comment2.target=void\ incY(double)
+comment2.text=\n\ ADDITIONAL\ METHOD\:\ incY\n\ Added\ just\ to\ give\ vertical\ movement\ to\ the\ Triangle\ instances.\ \n\ \n\ @param\ \ a\ \ \ change\ or\ step\ in\ the\ y-position\ of\ the\ triangle\n
+comment3.params=g2d\ at
+comment3.target=void\ draw(java.awt.Graphics2D,\ java.awt.geom.AffineTransform)
+comment3.text=\n\ This\ will\ be\ the\ method\ that\ will\ draw\ the\ shape\ indicated\ in\ the\ class\ name.\ \n\ \n\ @param\ \ g2d\ \ \ Graphics2D\ that\ will\ draw\ the\ Triangle\n\ @param\ \ at\ \ \ \ AffineTransform\ that\ will\ draw\ the\ Triangle\n
+comment4.params=
+comment4.target=void\ animate()
+comment4.text=\n\ This\ is\ left\ blank\ since\ it\ will\ not\ be\ used\ in\ the\ animation.\ \n
+numComments=5

@@ -1,0 +1,32 @@
+
+.include "nominal.jsim"
+.include "stdcell.jsim"
+.include "8clocks.jsim"
+
+Wtest1 a[31:0] nrz(0v,5.0v,10ns,0ns,.1ns,.1ns) 0x1000000F
+Wtest2 b[4:0] nrz(0v,5.0v,10ns,0ns,.1ns,.1ns) 9
+Wtest3 alu[1:0] nrz(0v,5.0v,10ns,0ns,.1ns,.1ns) 0b00 0b01 0b11
+
+
+.subckt ALUshift A[31:0] op[1:0] B[4:0] S[31:0] 
+Xrev op0 A[31:0] AA[31:0] reverser
+Xsign op1 A31 f and2
+XLfour B4#32 AA[31:0] AA[15:0] f#16 W[31:0] mux2
+XLthre B3#32 W[31:0] W[23:0] f#8 X[31:0] mux2
+XLtwo  B2#32 X[31:0] X[27:0] f#4 Y[31:0] mux2
+XLone  B1#32 Y[31:0] Y[29:0] f#2 Z[31:0] mux2
+XLdone B0#32 Z[31:0] Z[30:0] f SL[31:0] mux2
+Xrev2 op0 SL[31:0] S[31:0] reverser
+.ends
+
+.subckt reverser ALUFN0 a[31:0] aa[31:0]
+Xmux2  ALUFN0#32 a[31:0] a[0:31]  aa[31:0] mux2
+.ends
+
+
+Xshift a[31:0] alu[1:0] b[4:0] out[31:0] ALUshift
+
+.tran 100ns
+.plot a[31:0] 
+.plot alu[1:0]
+.plot out[31:0]

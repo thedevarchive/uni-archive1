@@ -1,0 +1,51 @@
+body, #container {
+  display: flex;
+  flex-direction: column;
+  font-family: Tahoma, Geneva, sans-serif;
+  overflow: scroll;
+}
+
+
+header
+{
+  background-color: SkyBlue; 
+}
+
+
+footer
+{
+  background-color: MediumSeaGreen; 
+}
+
+
+#right
+{
+  background-color: Coral; 
+}
+
+#title
+{
+  font-size: 16pt; 
+}
+
+body::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+@media (min-width: 768px) {
+  #container {
+    flex-direction: row;
+    flex: 1;
+  }
+  #center {
+    flex: 1;
+  }
+  #right {
+    /* 12em is the width of the columns */
+    flex: 0 0 12em;
+  }
+}

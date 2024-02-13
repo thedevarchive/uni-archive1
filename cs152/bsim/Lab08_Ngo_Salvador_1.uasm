@@ -1,0 +1,26 @@
+|I have not discussed the BSim language code in my program with anyone other than my instructor in this course.
+|I have not used BSim language code obtained from another student, or any unauthorized source, either modified or 
+|unmodified.
+|If any BSim language code or documentation used in my program was obtained from another source, 
+|such as a text book or course notes, that has been clearly noted with a proper citation in the comments of my 
+|program.
+
+.include beta.uasm
+
+LD(R31, X, R0) 
+LD(R31, Y, R1) 
+
+| a mod b = remainder
+| remainder = dividend - quotient * divisor
+.macro MOD(RA, RB, RC) {
+DIV(RA, RB, RC) 
+MUL(RC, RB, RC) 
+SUB(RA, RC, RC) 
+}
+
+MOD(R0, R1, R2) 
+
+. = 0x200
+X: LONG(14)
+Y: LONG(8) 
+Z: LONG(R2) 

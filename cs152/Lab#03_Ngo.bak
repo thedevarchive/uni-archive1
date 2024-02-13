@@ -1,0 +1,40 @@
+*I have not discussed the JSim language code in my program with anyone other than my instructor in this course.
+*I have not used JSim language code obtained from another student, or any unauthorized source, either modified or 
+*unmodified.
+*If any JSim language code or documentation used in my program was obtained from another source, 
+*such as a text book or course notes, that has been clearly noted with a proper citation in the comments of my 
+*program.
+
+.include "8clocks.jsim" 
+.include "nominal.jsim" 
+.include "stdcell.jsim" 
+
+Wadd1 a[31:0] nrz(0, 5, 10ns, 10ns, 0.1ns, 0.1ns) 0x00000000 0x55555555 0x00000000 0x55555555 0xAAAAAAAA 0x00000000 0xAAAAAAAA 0x00000000 0x00000000 0x00000001 0xFFFFFFFF 0xFFFFFFFF
+Wadd2 b[31:0] nrz(0, 5, 10ns, 10ns, 0.1ns, 0.1ns) 0x00000000 0x00000000 0x55555555 0x55555555 0x00000000 0xAAAAAAAA 0xAAAAAAAA 0x00000000 0x00000000 0xFFFFFFFF 0x00000001 0xFFFFFFFF
+Wsign sig[31:0] nrz(0, 5, 10ns, 10ns, 0.1ns, 0.1ns) 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0x00000000 0xFFFFFFFF 0xFFFFFFFF 0x00000000 0x00000000 0xFFFFFFFF
+
+.subckt FA a b cin s cout
+Xxor1 a b q xor2
+Xxor2 q cin s xor2
+Xand1 q cin r and2
+Xand2 a b t and2
+Xor r t cout or2
+.ends
+
+.subckt RCA a[31:0] b[31:0] cin s[31:0] cout[31:0]
+Xfirst a[0] b[0] cin s[0] cout[0] FA
+Xnext a[1:31] b[1:31] cout[0:30] s[1:31] cout[1:31] FA
+.ends
+
+.subckt SCA a[31:0] b[31:0] oper[31:0] s[31:0] cout[31:0] 
+Xflip b[31:0] oper[31:0] inv[31:0] xor2
+Xfirst a[0] inv[0] oper[0] s[0] cout[0] FA
+Xnext a[1:31] inv[1:31] cout[0:30] s[1:31] cout[1:31] FA
+.ends
+
+Xadd a[31:0] b[31:0] sig[31:0] s[31:0] cout[31:0] SCA
+
+.tran 250ns
+.plot a[31:0]
+.plot b[31:0]
+.plot s[31:0]

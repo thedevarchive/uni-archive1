@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=w\ h
+comment0.target=MyFrame(int,\ int)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ MyFrame\n
+comment1.params=
+comment1.target=void\ setup()
+comment1.text=\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\n\ \n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \n
+comment2.params=
+comment2.target=void\ activateButtons()
+comment3.params=ae
+comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment4.params=ae
+comment4.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=5

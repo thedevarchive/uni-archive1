@@ -1,0 +1,42 @@
+*I have not discussed the JSim language code in my program with anyone other than my instructor in this course.
+*I have not used JSim language code obtained from another student, or any unauthorized source, either modified or 
+*unmodified.
+*If any JSim language code or documentation used in my program was obtained from another source, 
+*such as a text book or course notes, that has been clearly noted with a proper citation in the comments of my 
+*program.
+
+.include "nominal.jsim"
+.include "stdcell.jsim"
+.include "8clocks.jsim"
+
+Wreset r nrz(0v,5.0v,10ns,0ns,.1ns,.1ns) 0 1
+Wcount c[31:0] nrz(0v,5.0v,10ns,0ns,.1ns,.1ns) 0 0xABCDEF00
+
+Xinc add constant0
+
+.subckt FA a b cin s cout
+Xxor1 a b q xor2
+Xxor2 q cin s xor2
+Xand1 q cin r and2
+Xand2 a b t and2
+Xor r t cout or2
+.ends
+
+.subckt 32BXOR x[31:0] in y[31:0]
+Xxor x[31:0] in#32 y[31:0] xor2
+.ends
+
+.subckt SCA a[31:0] b[31:0] oper s[31:0] cout[31:0] 
+Xflip b[31:0] oper inv[31:0] 32BXOR
+Xfirst a[0] inv[0] oper s[0] cout[0] FA
+Xnext a[1:31] inv[1:31] cout[0:30] s[1:31] cout[1:31] FA
+.ends
+
+*min = mux in
+*min is the set of values to be entered in the multiplexer
+Xcount a[31:0] c[31:0] add s[31:0] cout[31:0] SCA
+Xdflip s[31:0] clk4#32 min[31:0] dreg
+Xmux min[31:0] 0#32 r#32 a[31:0] mux2
+
+.tran 10000ns
+.plot s[31:0]

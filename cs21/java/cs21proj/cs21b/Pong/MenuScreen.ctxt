@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=x\ y\ c
+comment0.target=MenuScreen(int,\ int,\ java.awt.Color)
+comment0.text=\n\ Constructor\ for\ MenuScreen.\ Mainly\ for\ setting\ out\ the\ position\ of\ the\ background\ to\ be\ used.\ \n\ \n\ @param\ \ x\ \ \ x-position\ of\ the\ background\n\ @param\ \ y\ \ \ y-position\ of\ the\ background\n\ @param\ \ c\ \ \ Color\ of\ the\ background\ \n
+comment1.params=g2d\ reset
+comment1.target=void\ draw(java.awt.Graphics2D,\ java.awt.geom.AffineTransform)
+comment1.text=\n\ Draws\ the\ background\ (with\ the\ given\ position\ and\ color).\ \n\ Mainly\ extracts\ the\ sprites\ to\ be\ used\ for\ the\ background.\ \n
+numComments=2

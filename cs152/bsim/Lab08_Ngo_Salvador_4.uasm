@@ -1,0 +1,37 @@
+|I have not discussed the BSim language code in my program with anyone other than my instructor in this course.
+|I have not used BSim language code obtained from another student, or any unauthorized source, either modified or 
+|unmodified.
+|If any BSim language code or documentation used in my program was obtained from another source, 
+|such as a text book or course notes, that has been clearly noted with a proper citation in the comments of my 
+|program.
+
+| ONE TIME PAD ENCRYPTION - XOR THE BITS
+| Z = X $ Y = X XOR Y (XOR EACH BIT) 
+| WHERE Z IS THE CIPHERTEXT, X IS THE MESSAGE, AND Y IS THE KEY 
+
+.include beta.uasm
+
+ADDC(R0, 7, R0) | iterator for extendKey
+CMOVE(K, R1) | load key (K) in R1
+LD(R1, 0, R8) | store key in register R8
+LD(R1, 0, R9) | store key in R9. R9 will contain extendKey
+LD(M, R16) |load message (M) in R16
+
+|extendKey extends key to 32 bits
+extendKey: 
+	BF(R0, encrypt) | when r = 0, call encrypt
+	SHLC(R9, 4, R9) | shift R9 4 bits to the left
+	ADD(R8, R9, R9) | add R8 and R9 to replicate the bit values to every byte
+	SUBC(R0, 1, R0) | decrement iterator
+	CALL(extendKey) | loop again
+
+|encrypt xors the message to produce the ciphertext (encrypted message) 
+encrypt: 
+	XOR(R16, R9, R16) 
+	ST(R16, 0x20C) |store after xor
+
+
+| C = M $ K
+. = 0x200
+M: LONG(0b01011110101111110000101010100100)
+K: LONG(0b1011)

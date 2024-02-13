@@ -1,0 +1,22 @@
+READ ME FOR INTSTACK: 
+
+The IntStack program is a stack that stores integers (numbers) using a LinkedList consisting of IntNodes. 
+As it is a stack, it follows last-in, first-out (LIFO), which means that numbers stored in the stack early on will be the last numbers to leave the stack. The later numbers stored in the stack will be popped first. The last number placed in the stack will leave the stack first.
+
+Once you launch the executable file, the following text appears: 
+
+Please enter a command.
+CHOICES: push, pop, display, exit (case sensitive)
+
+When this is displayed, you must type the following choices: push, pop, display, or exit, followed by pressing the Enter key. 
+
+When push is entered, you will be asked to input a number. Any input that is not a considered a number will cause the program to break. 
+If a number is typed in, the program will store the number in the stack, and will display the number stored in the stack. 
+
+When pop is entered, the number at the top of the stack will be popped and the program will display the popped number. It will say "Stack is empty" if there is nothing in the stack. 
+
+When display is entered, the program will display all the numbers currently in the stack. It is printed left to right, from the top of stack to the bottom. The leftmost number is the number currently at the top of the stack. An error will occur when display is entered while the IntStack is empty. 
+
+When exit is entered, the program quits.
+
+Note that the keywords are case sensitive. IT MUST BE TYPED IN LOWERCASE LETTERS. If the program does not recognize the command, it will ask again for a valid one. 

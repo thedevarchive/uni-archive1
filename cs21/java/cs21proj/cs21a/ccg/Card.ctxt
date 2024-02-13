@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=t\ n\ h\ p
+comment0.target=Card(java.lang.String,\ java.lang.String,\ int,\ int)
+comment1.params=damage
+comment1.target=void\ sustainHit(int)
+comment2.params=
+comment2.target=java.lang.String\ getType()
+comment3.params=
+comment3.target=java.lang.String\ getName()
+comment4.params=
+comment4.target=int\ getHitPoints()
+comment5.params=
+comment5.target=int\ getPower()
+numComments=6

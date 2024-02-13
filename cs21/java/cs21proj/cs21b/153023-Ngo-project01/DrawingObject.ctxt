@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=g2d\ at
+comment0.target=void\ draw(java.awt.Graphics2D,\ java.awt.geom.AffineTransform)
+comment0.text=\n\ This\ method\ draws\ the\ shape\ indicated\ in\ the\ class\ name.\n\ \n\ @param\ \ g2d\ \ \ \ the\ Graphics2D\ that\ will\ draw\ the\ shape\ \n\ @param\ \ at\ \ \ \ \ the\ AffineTransform\ that\ will\ be\ used\ in\ drawing\ the\ shape\ \n
+comment1.params=
+comment1.target=void\ animate()
+comment1.text=\n\ This\ method\ makes\ the\ drawn\ shape\ move.\n
+numComments=2

@@ -1,0 +1,44 @@
+
+
+.include beta.uasm
+
+LD(R31, A, R0)
+LD(R31, B, R1)
+ADD(R0, R1, R2) 
+SUB(R0, R1, R3)  
+MUL(R0, R1, R4)
+CMPEQ(R0, R1, R5) 
+ST(R2, 700, R31)
+ST(R3, 712, R31) 
+ST(R4, 724, R31) 
+ST(R5, 736, R31) 
+
+LD(R31, C, R0) 
+LD(R31, D, R1) 
+ADD(R0, R1, R2)
+SUB(R0, R1, R3) 
+MUL(R0, R1, R4) 
+CMPEQ(R0, R1, R5) 
+ST(R2, 704, R31) 
+ST(R3, 716, R31) 
+ST(R4, 728, R31) 
+ST(R5, 740, R31) 
+
+LD(R31, E, R0) 
+LD(R31, F, R1) 
+ADD(R0, R1, R2) 
+SUB(R0, R1, R3)
+MUL(R0, R1, R4)
+CMPEQ(R0, R1, R5) 
+ST(R2, 708, R31) 
+ST(R3, 720, R31) 
+ST(R4, 732, R31) 
+ST(R5, 744, R31) 
+
+.=600
+A: LONG (2) 
+B: LONG (-3) 
+C: LONG (-2147483648) 
+D: LONG (2) 
+E: LONG (3) 
+F: LONG (5) 

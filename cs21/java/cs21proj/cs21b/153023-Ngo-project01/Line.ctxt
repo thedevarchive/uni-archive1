@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=a1\ b1\ a2\ b2
+comment0.target=Line(double,\ double,\ double,\ double)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Line\n\ \n\ The\ constructor\ requires\ four\ doubles\ that\ would\ serve\ as\ the\ two\ points\ to\ draw\ a\ line\ to,\ since\n\ two\ points\ are\ needed\ to\ draw\ a\ line.\ \n\ \n\ @param\ \ a1\ \ \ first\ point's\ x-coordinate\n\ @param\ \ b1\ \ \ first\ point's\ y-coordinate\n\ @param\ \ a2\ \ \ second\ point's\ x-coordinate\n\ @param\ \ b2\ \ \ second\ point's\ y-coordinate\n
+comment1.params=g2d\ at
+comment1.target=void\ draw(java.awt.Graphics2D,\ java.awt.geom.AffineTransform)
+comment1.text=\n\ This\ will\ be\ the\ method\ that\ will\ draw\ the\ shape\ indicated\ in\ the\ class\ name.\ \n\ \n\ @param\ \ g2d\ \ \ Graphics2D\ that\ will\ draw\ the\ Line\n\ @param\ \ at\ \ \ \ AffineTransform\ that\ will\ draw\ the\ Line\n
+comment2.params=
+comment2.target=void\ animate()
+comment2.text=\n\ This\ method\ is\ left\ blank\ since\ this\ will\ not\ animated.\ \n
+numComments=3

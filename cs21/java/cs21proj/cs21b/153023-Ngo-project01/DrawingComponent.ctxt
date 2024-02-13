@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=f
+comment0.target=DrawingComponent(javax.swing.JFrame)
+comment1.params=g
+comment1.target=void\ paintComponent(java.awt.Graphics)
+comment2.params=
+comment2.target=void\ activateL()
+comment3.params=
+comment3.target=void\ run()
+comment4.params=
+comment4.target=void\ animateAll()
+numComments=5

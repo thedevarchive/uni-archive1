@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=c
+comment0.target=Cloud(java.awt.Color)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Cloud\n
+comment1.params=g2d
+comment1.target=void\ drawC(java.awt.Graphics2D)
+comment1.text=\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\n\ \n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \n
+numComments=2

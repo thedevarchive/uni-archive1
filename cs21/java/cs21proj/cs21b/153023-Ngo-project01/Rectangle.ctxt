@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.params=a\ b\ w\ l\ c
+comment0.target=Rectangle(double,\ double,\ double,\ double,\ java.awt.Color)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Rectangle\n
+comment1.params=a
+comment1.target=void\ incX(double)
+comment1.text=\n\ ADDITIONAL\ METHOD\:\ incX\n\ Added\ just\ to\ give\ horizontal\ movement\ to\ the\ Rectangle\ instances.\ \n\ \n\ @param\ \ a\ \ \ change\ or\ step\ in\ the\ x-position\ of\ the\ Rectangle\n
+comment2.params=b
+comment2.target=void\ incY(double)
+comment2.text=\n\ ADDITIONAL\ METHOD\:\ incY\n\ Added\ just\ to\ give\ vertical\ movement\ to\ the\ Rectangle\ instances.\ \n\ \n\ @param\ \ a\ \ \ change\ or\ step\ in\ the\ y-position\ of\ the\ Rectangle\n
+comment3.params=g2d\ at
+comment3.target=void\ draw(java.awt.Graphics2D,\ java.awt.geom.AffineTransform)
+comment3.text=\n\ This\ will\ be\ the\ method\ that\ will\ draw\ the\ shape\ indicated\ in\ the\ class\ name.\ \n\ \n\ @param\ \ g2d\ \ \ Graphics2D\ that\ will\ draw\ the\ Rectangle\n\ @param\ \ at\ \ \ \ AffineTransform\ that\ will\ draw\ the\ Rectangle\n
+comment4.params=
+comment4.target=void\ animate()
+comment4.text=\n\ Animates\ the\ object.\ \n
+numComments=5

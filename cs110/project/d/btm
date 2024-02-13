@@ -1,0 +1,119 @@
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.RandomAccessFile;
+
+public class BTreeManager
+{
+  private RandomAccessFile file;
+  private long numRecords;
+  private long rootIndex;
+  private static final int LONG_SIZE = 8;
+  private static final int OFFSET_NUM_RECORDS = 0;
+  private static final int OFFSET_ROOT_INDEX = 8;
+  private static final int OFFSET_FIRST_NODE = 16;
+  private static final String FILE_MODE = "rwd";
+  private static final int ORDER = 5;
+  private static final int NODE_SIZE = 14;
+  public static final long NULL_ENTRY = -1L;
+  private static final String ERROR = "ERROR: ";
+  
+  public BTreeManager(String paramString) throws IOException
+  {
+    File localFile = new File(paramString);
+    boolean bool = localFile.exists();
+    
+    file = new RandomAccessFile(paramString, "rwd");
+    
+
+    if (bool) {
+      file.seek(0L);
+      numRecords = file.readLong();
+      rootIndex = file.readLong();
+    }
+    else {
+      numRecords = 1L;
+      rootIndex = 0L;
+      
+      file.writeLong(numRecords);
+      file.writeLong(rootIndex);
+      int i = BTreeNode.ARRAY_SIZE;
+      for (int j = 0; j < i; j++) {
+        file.writeLong(-1L);
+      }
+    }
+  }
+  
+  public void insert(long paramLong1, long paramLong2)
+    throws IOException
+  {
+    BTreeNode localBTreeNode = getNode(paramLong1);
+    
+
+    if (localBTreeNode.getValueIndex(paramLong1) != BTreeNode.NO_KEY_FOUND) {
+      System.out.println("ERROR: " + paramLong1 + " already exists.");
+    }
+    else
+    {
+      localBTreeNode.insert(paramLong1, paramLong2);
+      writeNodeToFile(localBTreeNode, 0L);
+      
+      System.out.println(paramLong1 + " inserted.");
+    }
+  }
+  
+  public boolean containsKey(Long paramLong)
+    throws IOException
+  {
+    BTreeNode localBTreeNode = getNode(paramLong.longValue());
+    
+
+    return localBTreeNode.getValueIndex(paramLong.longValue()) != BTreeNode.NO_KEY_FOUND;
+  }
+  
+  public void close() throws IOException {
+    file.seek(0L);
+    file.writeLong(numRecords);
+    file.writeLong(rootIndex);
+    file.close();
+  }
+  
+
+
+  public BTreeNode getNode(long paramLong)
+    throws IOException
+  {
+    file.seek(8L);
+    long l = file.readLong();
+    
+
+    int i = BTreeNode.ARRAY_SIZE;
+    long[] arrayOfLong = new long[i];
+    for (int j = 0; j < i; j++) {
+      arrayOfLong[j] = file.readLong();
+    }
+    
+    return new BTreeNode(arrayOfLong);
+  }
+  
+
+  public void writeNodeToFile(BTreeNode paramBTreeNode, long paramLong)
+    throws IOException
+  {
+    long[] arrayOfLong = paramBTreeNode.getElementsArray();
+    long l = 16L + paramLong * 14L * 8L;
+    file.seek(l);
+    
+    for (int i = 0; i < 14; i++) {
+      file.writeLong(arrayOfLong[i]);
+    }
+  }
+  
+
+  public long getValueIndex(long paramLong)
+    throws IOException
+  {
+    BTreeNode localBTreeNode = getNode(paramLong);
+    return localBTreeNode.getValueIndex(paramLong);
+  }
+}

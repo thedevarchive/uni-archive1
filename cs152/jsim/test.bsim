@@ -1,0 +1,20 @@
+.include beta.uasm
+
+| This program adds all the integers 
+| between N and 0  (i.e. if N=3,
+| then sum is 3 + 2 + 1 = 6)
+
+LD(R31, N, R0)
+CMOVE(N, R2)
+
+loop:
+	BEQ(R0, done)
+	ADD(R1, R0, R1)
+	SUBC(R0, 1, R0)
+	CALL(loop)
+done:
+	ADDC(R2, 4, R2)
+	ST(R1, 0, R2)
+
+. = 0x200
+N: LONG(3)

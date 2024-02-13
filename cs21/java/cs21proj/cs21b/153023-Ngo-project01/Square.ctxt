@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=a\ b\ sz\ strk
+comment0.target=Square(double,\ double,\ double,\ int)
+comment0.text=\n\ Constructors\ for\ class\ Square.\ Generally,\ all\ Square\ instances\ need\ the\ x-coordinate,\ y-coordinate,\n\ and\ size\ defined.\ These\ constructors\ initializes\ these\ along\ with\ either\ stroke\ thickness,\ color,\ \n\ or\ both.\ \n\ \n\ The\ first\ constructor\ for\ Square\ is\ used\ to\ draw\ a\ square\ with\ a\ defined\ stroke.\ \n\ All\ Square\ instatiated\ by\ the\ constructor\ will\ have\ no\ color.\ \n\ \n\ @param\ \ a\ \ \ \ \ the\ x-coordinate\ where\ the\ drawing\ of\ the\ square\ will\ start\n\ @param\ \ b\ \ \ \ \ the\ y-coordinate\ where\ the\ drawing\ of\ the\ square\ will\ start\n\ @param\ \ sz\ \ \ \ the\ length\ of\ one\ side\ of\ the\ square\ (a\ square\ has\ four\ equal\ sides)\n\ @param\ \ strk\ \ the\ stroke\ thickness\ of\ the\ square\n
+comment1.params=a\ b\ sz\ c
+comment1.target=Square(double,\ double,\ double,\ java.awt.Color)
+comment1.text=\n\ The\ second\ constructor\ for\ Square\ is\ used\ to\ draw\ a\ Square\ with\ color.\ \ \n\ All\ Square\ instances\ will\ have\ the\ default\ stroke\ (1).\ \n\ \n\ @param\ \ a\ \ \ \ \ the\ x-coordinate\ where\ the\ drawing\ of\ the\ square\ will\ start\n\ @param\ \ b\ \ \ \ \ the\ y-coordinate\ where\ the\ drawing\ of\ the\ square\ will\ start\n\ @param\ \ sz\ \ \ \ the\ length\ of\ one\ side\ of\ the\ square\ (a\ square\ has\ four\ equal\ sides)\n\ @param\ \ c\ \ \ \ \ the\ color\ of\ the\ square\n
+comment2.params=a\ b\ sz\ strk\ c
+comment2.target=Square(double,\ double,\ double,\ int,\ java.awt.Color)
+comment2.text=\n\ The\ third\ constructor\ for\ Square\ is\ used\ to\ draw\ a\ Square\ with\ a\ defined\ color\ and\ stroke.\ \n\ \n\ @param\ \ a\ \ \ \ \ the\ x-coordinate\ where\ the\ drawing\ of\ the\ square\ will\ start\n\ @param\ \ b\ \ \ \ \ the\ y-coordinate\ where\ the\ drawing\ of\ the\ square\ will\ start\n\ @param\ \ sz\ \ \ \ the\ length\ of\ one\ side\ of\ the\ square\ (a\ square\ has\ four\ equal\ sides)\n\ @param\ \ strk\ \ the\ stroke\ thickness\ of\ the\ square\n\ @param\ \ c\ \ \ \ \ the\ color\ of\ the\ square\n
+comment3.params=a
+comment3.target=void\ incX(double)
+comment3.text=\n\ ADDITIONAL\ METHOD\:\ incX\n\ Added\ just\ to\ give\ horizontal\ movement\ to\ the\ Square\ instances.\ \n\ \n\ @param\ \ a\ \ \ change\ of\ step\ in\ the\ x-position\ of\ the\ square\n
+comment4.params=b
+comment4.target=void\ incY(double)
+comment4.text=\n\ ADDITIONAL\ METHOD\:\ incY\n\ Added\ just\ to\ give\ vertical\ movement\ to\ the\ Square\ instances.\ \n\ \n\ @param\ \ a\ \ \ change\ of\ step\ in\ the\ y-position\ of\ the\ square\n
+comment5.params=g2d\ at
+comment5.target=void\ draw(java.awt.Graphics2D,\ java.awt.geom.AffineTransform)
+comment5.text=\n\ This\ will\ be\ the\ method\ that\ will\ draw\ the\ shape\ indicated\ in\ the\ class\ name.\ \n\ Has\ condition\ statements\ for\ the\ stroke\ and\ color.\ \n\ \n\ @param\ \ g2d\ \ \ Graphics2D\ that\ will\ draw\ the\ Square\n\ @param\ \ at\ \ \ \ AffineTransform\ that\ will\ draw\ the\ Square\n
+comment6.params=
+comment6.target=void\ animate()
+comment6.text=\n\ This\ animates\ the\ Square\ instance.\ \ \n
+numComments=7

@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=a\ b\ m\ fs\ c
+comment0.target=Text(int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Text\n
+comment1.params=a
+comment1.target=void\ incX(double)
+comment1.text=\n\ ADDITIONAL\ METHOD\:\ incX\n\ Added\ just\ to\ give\ horizontal\ movement\ to\ the\ Text\ instances.\ \n\ \n\ @param\ \ a\ \ \ change\ or\ step\ in\ the\ x-position\ of\ the\ Text\n
+comment2.params=b
+comment2.target=void\ incY(double)
+comment2.text=\n\ ADDITIONAL\ METHOD\:\ incY\n\ Added\ just\ to\ give\ vertical\ movement\ to\ the\ Text\ instances.\ \n\ \n\ @param\ \ a\ \ \ change\ or\ step\ in\ the\ y-position\ of\ the\ Text\n
+comment3.params=g2d\ at
+comment3.target=void\ draw(java.awt.Graphics2D,\ java.awt.geom.AffineTransform)
+comment3.text=\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\n\ \n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \n
+comment4.params=
+comment4.target=void\ animate()
+numComments=5

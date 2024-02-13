@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=GameOver
+comment1.params=x\ y
+comment1.target=GameOver(int,\ int)
+comment2.params=g2d\ reset
+comment2.target=void\ draw(java.awt.Graphics2D,\ java.awt.geom.AffineTransform)
+comment3.params=
+comment3.target=void\ kill()
+comment4.params=n
+comment4.target=void\ moveH(int)
+comment5.params=n
+comment5.target=void\ moveV(int)
+comment6.params=n
+comment6.target=void\ setX(int)
+comment7.params=n
+comment7.target=void\ setY(int)
+comment8.params=
+comment8.target=int\ getX()
+comment9.params=
+comment9.target=int\ getY()
+numComments=10

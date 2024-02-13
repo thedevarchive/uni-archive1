@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.params=w\ h
+comment0.target=EmojiFrame(int,\ int)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ EmojiFrame\n
+comment1.params=
+comment1.target=void\ setup()
+comment1.text=\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\n\ \n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \n
+comment10.params=ae
+comment10.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment2.params=
+comment2.target=void\ actvBtns()
+comment3.params=ae
+comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment4.params=ae
+comment4.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment5.params=ae
+comment5.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment6.params=ae
+comment6.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment7.params=ae
+comment7.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment8.params=ae
+comment8.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment9.params=ae
+comment9.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=11

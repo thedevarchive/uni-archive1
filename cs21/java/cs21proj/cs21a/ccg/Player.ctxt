@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.params=n
+comment0.target=Player(java.lang.String)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Player\n
+comment1.params=c
+comment1.target=void\ drawCard(Card)
+comment10.params=
+comment10.target=java.lang.String\ getName()
+comment2.params=
+comment2.target=java.lang.String\ swap()
+comment3.params=
+comment3.target=int\ findCard()
+comment4.params=
+comment4.target=void\ discard()
+comment5.params=
+comment5.target=void\ claimToken()
+comment6.params=
+comment6.target=java.lang.String\ statusReport()
+comment7.params=
+comment7.target=Card\ getActiveCard()
+comment8.params=
+comment8.target=boolean\ handIsFull()
+comment9.params=
+comment9.target=int\ getTokenCount()
+numComments=11

@@ -1,0 +1,110 @@
+*I have not discussed the JSim language code in my program with anyone other than my instructor in this course.
+*I have not used JSim language code obtained from another student, or any unauthorized source, either modified or 
+*unmodified.
+*If any JSim language code or documentation used in my program was obtained from another source, 
+*such as a text book or course notes, that has been clearly noted with a proper citation in the comments of my 
+*program.
+
+*The syntax for duplication (e.g. in#32) 
+*and skip-counting iterator (e.g. s[31:0:4]) taken from the following link: 
+*https://drive.google.com/file/d/0B2KjeOJF7yh3Nmw1b25GX2UwcWs/view
+
+.include "stdcell.jsim" 
+
+Wadd1 a[31:0] nrz(0, 5, 35ns, 5ns, 0.1ns, 0.1ns) 0x00000002 0x80000000 0x00000003 0x7FFFFFFF 0x00000003
+Wadd2 b[31:0] nrz(0, 5, 35ns, 5ns, 0.1ns, 0.1ns) 0xFFFFFFFD 0x00000002 0x00000005 0xFFFFFFFE 0x00000003
+
+Xadd add constant0
+Xminus minus constant1 
+Xless less constant1
+Xequal equal constant1
+Xnless notless constant0
+Xneq notequal constant0
+
+.subckt FA a b cin s cout
+Xxor1 a b q xor2
+Xxor2 q cin s xor2
+Xand1 q cin r and2
+Xand2 a b t and2
+Xor r t cout or2
+.ends
+
+.subckt RCA a[31:0] b[31:0] cin s[31:0] cout[31:0]
+Xfirst a[0] b[0] cin s[0] cout[0] FA
+Xnext a[1:31] b[1:31] cout[0:30] s[1:31] cout[1:31] FA
+.ends
+
+.subckt 32BXOR x[31:0] in y[31:0]
+Xxor x[31:0] in#32 y[31:0] xor2
+.ends
+
+*The rules for detecting overflow in a two's complement sum are simple:
+*If the sum of two positive numbers yields a negative result, the sum has overflowed.
+*If the sum of two negative numbers yields a positive result, the sum has overflowed.
+*Taken from http://sandbox.mc.edu/~bennet/cs110/tc/orules.html
+
+.subckt hasOverflow a b s v
+Xinv1 a na inverter
+Xinv2 b nb inverter
+Xinv3 s ns inverter
+Xand1 a b ns first and3
+Xand2 na nb s second and3
+Xor first second v or2
+.ends
+
+.subckt isAllZero s[31:0] z
+Xor1 s[31:0:4] s[30:0:4] s[29:0:4] s[28:0:4] o[7:0] or4
+XorA o[7:4]  oA or4
+XorB o[3:0]  oB or4
+XorZ oA oB oAB or2
+Xinv oAB z inverter
+.ends
+
+.subckt SCA a[31:0] b[31:0] oper s[31:0] cout[31:0] 
+Xflip b[31:0] oper inv[31:0] 32BXOR
+Xfirst a[0] inv[0] oper s[0] cout[0] FA
+Xnext a[1:31] inv[1:31] cout[0:30] s[1:31] cout[1:31] FA
+.ends
+
+*MA = modified adder
+.subckt MA a[31:0] b[31:0] oper f[31:0] n v z
+Xsca a[31:0] b[31:0] oper f[31:0] cout[31:0] SCA
+Xflip b[31:0] oper inv[31:0] 32BXOR
+
+.connect f[31] n 
+Xof a[31] inv[31] f[31] v hasOverflow
+Xzero f[31:0] z isAllZero
+.ends
+
+*op1 checks if a = b when op1 is high
+*op2 checks if a < b when op2 is high
+*equal will be high when op1 is high (user enables equal check) 
+*and the result between a and b is zero (z is high)
+*less will be high when either there is overflow or sum is negative 
+*(cannot be both because two large positive numbers added together should not be negative in actual math)
+*less should also have op2 on high (user enables less than check) 
+*If op1 and op2 are both high, comparator will check if a <= b
+
+.subckt comp op1 op2 n v z out
+Xand1 op1 z equal and2
+Xxor n v l xor2
+Xand2 op2 l less and2
+Xand3 equal less eorl and2
+Xor equal less eorl out or3
+.ends
+
+Xtest a[31:0] b[31:0] minus s[31:0] out1 out2 out3 MA
+Xl notequal less out1 out2 out3 lout comp
+Xe equal notless out1 out2 out3 eout comp
+Xel equal less out1 out2 out3 elout comp
+
+.tran 200ns
+.plot a[31:0]
+.plot b[31:0]
+.plot s[31:0]
+.plot out1
+.plot out2
+.plot out3
+.plot lout
+.plot eout
+.plot elout

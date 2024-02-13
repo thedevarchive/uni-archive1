@@ -1,0 +1,12 @@
+public class stuff
+{
+	public static void main( String args[] )
+	{
+	int myAge = 19;
+	int yourAge = myAge;
+	System.out.println(yourAge) ;
+	int myAge = 20; // happy birthday
+	}
+	System.out.println(yourAge);
+	}
+}

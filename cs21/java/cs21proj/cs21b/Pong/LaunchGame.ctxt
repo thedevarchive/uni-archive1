@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=w\ h
+comment0.target=LaunchGame(int,\ int)
+comment0.text=\n\ Constructor\ for\ PlayerFrame\ \n\ \n\ @param\ \ w\ \ \ \ determines\ the\ width\ of\ the\ window\ of\ the\ GUI\n\ @param\ \ h\ \ \ \ determines\ the\ height\ of\ the\ window\ of\ the\ GUI\n
+comment1.params=
+comment1.target=void\ setUpGUI()
+comment1.text=\n\ Creates\ the\ GUI\ for\ the\ game.\ It\ also\ starts\ up\ the\ PComponent\ which\ has\ most\ of\ the\ content\ of\n\ the\ game.\ \n
+comment2.params=
+comment2.target=void\ connectToServer()
+comment2.text=\n\ This\ initiates\ the\ connection\ to\ the\ server,\ which\ oversees\ and\ handles\ the\ connection\ and\ \n\ communication\ of\ the\ two\ players\ in\ the\ game.\ \n
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+comment3.text=\n\ This\ launches\ the\ GUI\ and\ the\ game.\ \n
+numComments=4

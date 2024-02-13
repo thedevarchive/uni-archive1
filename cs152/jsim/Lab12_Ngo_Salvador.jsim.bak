@@ -1,0 +1,377 @@
+*I have not discussed the JSim language code in my program with anyone other than my instructor in this course.
+*I have not used JSim language code obtained from another student, or any unauthorized source, either modified or 
+*unmodified.
+*If any JSim language code or documentation used in my program was obtained from another source, 
+*such as a text book or course notes, that has been clearly noted with a proper citation in the comments of my 
+*program.
+
+.include "8clocks.jsim"
+.include "nominal.jsim"
+.include "stdcell.jsim"
+
+*program counter
+
+.subckt PC clk reset pcsel[1:0] jt[31:0] const[31:0] ia[31:0] iabranching[31:0] ianext[31:0]
+// add 4 to PC
+Xadd1 0#29 vdd 0#2 ia[31:0] 0 ianext[31:0] Z1 N1 V1 MA
+// PC when branching
+Xadd2 ianext[31:0] const[29:0] 0#2 0 iabranching[31:0] Z2 N2 V2 MA
+// if pcsel = 00, PC+4; if pcsel = 01, branch; if pcsel = 10, jump
+Xmux1 pcsel0#32 pcsel1#32 ianext[31:0] iabranching[31:0] jt[31:2] 0#2 0#32 pcout[31:0] mux4
+
+Xmux2 reset#32 pcout[31:0] 0#32 newia[31:0] mux2
+Xreg1 newia[31:0] clk#32 ia[31:0] dreg
+.ends
+
+*register
+
+.subckt reg clk werf ra2sel ra[4:0] rb[4:0] rc[4:0] wdata[31:0] radata[31:0] rbdata[31:0]
+
+Xregfile
++ vdd 0 0 ra[4:0] rad[31:0] // A read port (RA)
++ vdd 0 0 ra2mux[4:0] rbd[31:0] // B read port (RB or RC)
++ 0 clk werf rc[4:0] wdata[31:0] // write port (WD)
++ $memory width=32 nlocations=31
++ contents=(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0)
+
+*rb if ra2sel = 0, rc if ra2sel = 1
+Xchoose ra2sel#5 rb[4:0] rc[4:0] ra2mux[4:0] mux2
+
+*check if RA = 1
+Xcheck1 ra[3:0] zero1 and4
+Xcheck2 ra4 zero1 zero2 and2
+* check if RA2MUX = 1
+Xcheck3 ra2mux[3:0] zero3 and4
+Xcheck4 ra2mux4 zero3 zero4 and2
+
+* when ra is reg31, then store 0 into RA1
+Xreturn1 zero2#32 rad[31:0] 0#32 radata[31:0] mux2
+* when rb is reg31, then store 0 into register b
+Xreturn2 zero4#32 rbd[31:0] 0#32 rbdata[31:0] mux2
+
+.ends
+
+*control logic
+
+.subckt ctl reset z id[31:26] pcsel[1:0] ra2sel bsel wdsel[1:0] alufn[5:0] wr werf
+
+Xctl vdd 0 0 id[31:26] z // one read port
++ pcsel[1:0] ra2sel bsel wdsel[1:0] alufn[5:0] wr werf
++ $memory width=14 nlocations=128
++ contents=(
+	+ 0b00000000000000 // opcode=0b0000000
+	+ 0b00000000000000 // opcode=0b0000001
+	+ 0b00000000000000 // opcode=0b0000010
+	+ 0b00000000000000 // opcode=0b0000011
+	+ 0b00000000000000 // opcode=0b0000100
+	+ 0b00000000000000 // opcode=0b0000101
+	+ 0b00000000000000 // opcode=0b0000110
+ 	+ 0b00000000000000 // opcode=0b0000111
+	+ 0b00000000000000 // opcode=0b0001000
+        + 0b00000000000000 // opcode=0b0001001
+	+ 0b00000000000000 // opcode=0b0001010
+	+ 0b00000000000000 // opcode=0b0001011
+	+ 0b00000000000000 // opcode=0b0001100
+	+ 0b00000000000000 // opcode=0b0001101
+	+ 0b00000000000000 // opcode=0b0001110
+	+ 0b00000000000000 // opcode=0b0001111
+	+ 0b00000000000000 // opcode=0b0010000
+	+ 0b00000000000000 // opcode=0b0010001
+	+ 0b00000000000000 // opcode=0b0010010
+	+ 0b00000000000000 // opcode=0b0010011
+	+ 0b00000000000000 // opcode=0b0010100
+	+ 0b00000000000000 // opcode=0b0010101
+	+ 0b00000000000000 // opcode=0b0010110
+	+ 0b00000000000000 // opcode=0b0010111
+	+ 0b00000000000000 // opcode=0b0011000
+        + 0b00000000000000 // opcode=0b0011001
+	+ 0b00000000000000 // opcode=0b0011010
+	+ 0b00000000000000 // opcode=0b0011011
+ 	+ 0b00000000000000 // opcode=0b0011100
+	+ 0b00000000000000 // opcode=0b0011101
+        + 0b00000000000000 // opcode=0b0011110
+	+ 0b00000000000000 // opcode=0b0011111
+	+ 0b00000000000000 // opcode=0b0100000
+	+ 0b00000000000000 // opcode=0b0100001
+	+ 0b00000000000000 // opcode=0b0100010
+	+ 0b00000000000000 // opcode=0b0100011
+	+ 0b00000000000000 // opcode=0b0100100
+	+ 0b00000000000000 // opcode=0b0100101
+	+ 0b00000000000000 // opcode=0b0100110
+	+ 0b00000000000000 // opcode=0b0100111
+	+ 0b00000000000000 // opcode=0b0101000
+	+ 0b00000000000000 // opcode=0b0101001
+	+ 0b00000000000000 // opcode=0b0101010
+	+ 0b00000000000000 // opcode=0b0101011
+	+ 0b00000000000000 // opcode=0b0101100
+	+ 0b00000000000000 // opcode=0b0101101
+        + 0b00000000000000 // opcode=0b0101110
+	+ 0b00000000000000 // opcode=0b0101111
+
+        + 0b00011000000001 // opcode=0b0110000 LD
+ 	+ 0b00011000000001 // opcode=0b0110001 LD
+	+ 0b00110000000010 // opcode=0b0110010 ST        
+	+ 0b00110000000010 // opcode=0b0110011 ST
+        + 0b00000000000000 // opcode=0b0110100 
+	+ 0b00000000000000 // opcode=0b0110101
+        + 0b10000000000001 // opcode=0b0110110 JMP
+	+ 0b10000000000001 // opcode=0b0110111 JMP
+        + 0b00000000000000 // opcode=0b0111000
+	+ 0b00000000000000 // opcode=0b0111001 
+        + 0b00000000000001 // opcode=0b0111010 BEQ, z = 0
+	+ 0b01000000000001 // opcode=0b0111011 BEQ, z = 1
+        + 0b01000000000001 // opcode=0b0111100 BNE, z = 0
+	+ 0b00000000000001 // opcode=0b0111101 BNE, z = 1
+        + 0b00000000000000 // opcode=0b0111110 LDR*
+	+ 0b00000000000000 // opcode=0b0111111 LDR*
+
+        + 0b00000100000001 // opcode=0b1000000 ADD
+	+ 0b00000100000001 // opcode=0b1000001 ADD
+        + 0b00000100000101 // opcode=0b1000010 SUB
+	+ 0b00000100000101 // opcode=0b1000011 SUB
+        + 0b00000000000000 // opcode=0b1000100 MUL*
+	+ 0b00000000000000 // opcode=0b1000101 MUL*
+        + 0b00000000000000 // opcode=0b1000110 DIV*
+	+ 0b00000000000000 // opcode=0b1000111 DIV*
+        + 0b00000111001101 // opcode=0b1001000 CMPEQ
+	+ 0b00000111001101 // opcode=0b1001001 CMPEQ
+        + 0b00000111010101 // opcode=0b1001010 CMPLT
+	+ 0b00000111010101 // opcode=0b1001011 CMPLT
+        + 0b00000111011101 // opcode=0b1001100 CMPLE
+	+ 0b00000111011101 // opcode=0b1001101 CMPLE
+        + 0b00000000000000 // opcode=0b1001110
+ 	+ 0b00000000000000 // opcode=0b1001111
+
+        + 0b00000101100001 // opcode=0b1010000 AND
+	+ 0b00000101100001 // opcode=0b1010001 AND
+        + 0b00000101111001 // opcode=0b1010010 OR
+	+ 0b00000101111001 // opcode=0b1010011 OR
+        + 0b00000001011001 // opcode=0b1010100 XOR
+	+ 0b00000001011001 // opcode=0b1010101 XOR
+        + 0b00000000000000 // opcode=0b1010110 
+	+ 0b00000000000000 // opcode=0b1010111 
+        + 0b00000110000001 // opcode=0b1011000 SHL
+	+ 0b00000110000001 // opcode=0b1011001 SHL
+        + 0b00000110000101 // opcode=0b1011010 SHR
+	+ 0b00000110000101 // opcode=0b1011011 SHR
+        + 0b00000110001101 // opcode=0b1011100 SRA
+	+ 0b00000110001101 // opcode=0b1011101 SRA
+        + 0b00000110001001 // opcode=0b1011110 SLA
+	+ 0b00000110001001 // opcode=0b1011111 SLA
+
+        + 0b00010100000001 // opcode=0b1100000 ADDC
+	+ 0b00010100000001 // opcode=0b1100001 ADDC
+        + 0b00010100000101 // opcode=0b1100010 SUBC
+	+ 0b00010100000101 // opcode=0b1100011 SUBC
+        + 0b00000000000000 // opcode=0b1100100 MULC*
+	+ 0b00000000000000 // opcode=0b1100101 MULC*
+        + 0b00000000000000 // opcode=0b1100110 DIVC*
+	+ 0b00000000000000 // opcode=0b1100111 DIVC*
+        + 0b00010111001101 // opcode=0b1101000 CMPEQC
+	+ 0b00010111001101 // opcode=0b1101001 CMPEQC
+        + 0b00010111010101 // opcode=0b1101010 CMPLTC
+	+ 0b00010111010101 // opcode=0b1101011 CMPLTC
+        + 0b00010111011101 // opcode=0b1101100 CMPLEC
+	+ 0b00010111011101 // opcode=0b1101101 CMPLEC
+        + 0b00000000000000 // opcode=0b1101110 
+	+ 0b00000000000000 // opcode=0b1101111
+
+        + 0b00010101100001 // opcode=0b1110000 ANDC
+	+ 0b00010101100001 // opcode=0b1110001 ANDC
+        + 0b00010101111001 // opcode=0b1110010 ORC
+	+ 0b00010101111001 // opcode=0b1110011 ORC
+        + 0b00010101011001 // opcode=0b1110100 XORC
+	+ 0b00010101011001 // opcode=0b1110101 XORC
+        + 0b00000000000000 // opcode=0b1110110
+	+ 0b00000000000000 // opcode=0b1110111
+        + 0b00010100000001 // opcode=0b1111000 SHLC
+	+ 0b00010100000001 // opcode=0b1111001 SHLC
+        + 0b00010100000101 // opcode=0b1111010 SHRC
+	+ 0b00010100000101 // opcode=0b1111011 SHRC
+        + 0b00010100001101 // opcode=0b1111100 SRAC
+	+ 0b00010100001101 // opcode=0b1111101 SRAC
+        + 0b00000000000000 // opcode=0b1111110 
+	+ 0b00000000000000 // opcode=0b1111111
+	+  )
+
+.ends
+
+*instruction memory
+
+.subckt im ia[31:0] id[31:0]
+
+Xinstrmem vdd 0 0 ia[11:2] id[31:0] 
++$memory width=32 nlocations=1024
++file="Lab12_Ngo_Salvador.bin"
+.ends
+
+*data memory
+
+.subckt dm clk wr ma[31:0] mrd[31:0] mwd[31:0]
+
+Xdatamem
++vdd 0 0 ma[11:2] mrd[31:0] // read mem data
++0 clk wr ma[11:2] mwd[31:0] // write to main mem
++$memory width=32 nlocations=1024
++file="Lab12_Ngo_Salvador.bin"
+.ends
+
+*the beta
+
+.subckt beta clk reset ia[31:0] id[31:0] ma[31:0] mrd[31:0] mwd[31:0] 
+
+// program counter
+Xpc clk reset pcsel[1:0] jt[31:0] const[31:0] ia[31:0] iabranching[31:0] ianext[31:0] PC
+
+// reset logic to ensure write functions are set to 0 at first clock edge
+Wreset2 reset2 nrz(0, 5, 40ns, 0ns, 0.1ns, 0.1ns) 0b0 0b1
+Xwrreset reset2 wr wrr and2
+// instruction memory
+Xinstr ia[31:0] id[31:0] im
+// data memory
+Xdata clk wrr ma[31:0] mrd[31:0] mwd[31:0] dm
+
+// regfile
+Xwerf reset2 werf werfr and2
+Xreg clk werfr ra2sel id[20:16] id[15:11] id[25:21] wdata[31:0] radata[31:0] mwd[31:0] reg
+
+// control unit
+Xctlogic reset z id[31:26] pcsel[1:0] ra2sel bsel wdsel[1:0] alufne[5:0] wr werf ctl
+
+// implement constant or literal C
+Xconn1 const[31:16] id[15]#16 knex // sign extend
+Xconn2 const[15:0] id[15:0] knex
+
+// get z 
+Xgetz1 radata[0:7] radata[8:15] radata[16:23] radata[24:31] subz1[0:7] nor4
+Xgetz3 subz1[0:1] subz1[2:3] subz1[4:5] subz1[6:7] subz2[0:1] and4
+Xgetz4 subz2[0] subz2[1] z and2
+
+// jt
+Xconn3 radata[31:0] jt[31:0] knex
+// if bsel = 0, b = data at rb; if bsel = 1, b = constant
+Xbselmux bsel#32 mwd[31:0] const[31:0] bdata[31:0] mux2
+// ALU
+Xalu radata[31:0] bdata[31:0] alufne[5:0] ma[31:0] ALU
+
+// choose data to be written to regfile
+Xwdselmux wdsel0#32 wdsel1#32 iabranching[31:0] ma[31:0] mrd[31:0] 0#32 wdata[31:0] mux4
+.ends
+
+.subckt knex a b
+.connect a b
+.ends
+
+Wreset reset nrz(0, 5, 40ns, 0ns, 0.1ns, 0.1ns) 0b1 0b0
+
+*ALU
+
+.subckt FA a b cin s cout
+Xxor1 a b q xor2
+Xxor2 q cin s xor2
+Xand1 q cin r and2
+Xand2 a b t and2
+Xor r t cout or2
+.ends
+
+*The rules for detecting overflow in a two's complement sum are simple:
+*If the sum of two positive numbers yields a negative result, the sum has overflowed.
+*If the sum of two negative numbers yields a positive result, the sum has overflowed.
+*Taken from http://sandbox.mc.edu/~bennet/cs110/tc/orules.html
+
+.subckt hasOverflow a b s v
+Xinv1 a na inverter
+Xinv2 b nb inverter
+Xinv3 s ns inverter
+Xand1 a b ns first and3
+Xand2 na nb s second and3
+Xor first second v or2
+.ends
+
+.subckt isAllZero s[31:0] z
+Xor1 s[31:0:4] s[30:0:4] s[29:0:4] s[28:0:4] o[7:0] or4
+XorA o[7:4]  oA or4
+XorB o[3:0]  oB or4
+XorZ oA oB oAB or2
+Xinv oAB z inverter
+.ends
+
+*MA = modified adder
+.subckt MA a[31:0] b[31:0] oper f[31:0] n v z
+Xflip b[31:0] oper#32 inv[31:0] xor2
+Xfirst a[0] inv[0] oper f[0] cout[0] FA
+Xnext a[1:31] inv[1:31] cout[0:30] f[1:31] cout[1:31] FA
+
+.connect f[31] n 
+Xof a[31] inv[31] f[31] v hasOverflow
+Xzero f[31:0] z isAllZero
+.ends
+
+*op1 checks if a = b when op1 is high
+*op2 checks if a < b when op2 is high
+*equal will be high when op1 is high (user enables equal check) 
+*and the result between a and b is zero (z is high)
+*less will be high when either there is overflow or sum is negative 
+*(cannot be both because two large positive numbers added together should not be negative in actual math)
+*less should also have op2 on high (user enables less than check) 
+*If op1 and op2 are both high, comparator will check if a <= b
+
+.subckt comp op1 op2 n v z out
+Xand1 op1 z equal and2
+Xxor n v l xor2
+Xand2 op2 l less and2
+Xand3 equal less eorl and2
+Xor equal less eorl out or3
+.ends
+
+.subckt bool ALUFN[0:3] a b out
+Xmux a b ALUFN0 ALUFN1 ALUFN2 ALUFN3 out mux4
+.ends
+
+.subckt bool32 ALUFN[3:0] a[31:0] b[31:0] bout[31:0]
+Xmux32 ALUFN0#32 ALUFN1#32 ALUFN2#32 ALUFN3#32 a[31:0] b[31:0] bout[31:0] bool
+.ends
+
+.subckt shift a[31:0] op[1:0] b[4:0] fin[31:0] 
+Xrev op0 a[31:0] aa[31:0] reverser
+Xsign op1 a31 f and2
+Xmux B4#32 aa[31:0] aa[15:0] f#16 w[31:0] mux2
+Xmux2 B3#32 w[31:0] w[23:0] f#8 x[31:0] mux2
+Xmux3  B2#32 x[31:0] x[27:0] f#4 y[31:0] mux2
+Xmux4  B1#32 y[31:0] y[29:0] f#2 z[31:0] mux2
+Xfin B0#32 z[31:0] z[30:0] f s[31:0] mux2
+Xrev2 op0 s[31:0] fin[31:0] reverser
+.ends
+
+*reverser swaps the positions of the binary digits
+*a31 swaps with a0, a30 swaps with a1, etc. 
+*the switch will occur when op0 = 1 (indicator of right shift) 
+*if op0 = 0, output will retain the original digit positions
+
+.subckt reverser op0 a[31:0] aa[31:0]
+Xswitch op0#32 a[31:0] a[0:31] aa[31:0] mux2
+.ends
+
+.subckt ALU a[31:0] b[31:0] alufn[5:0] f[31:0] 
+Xadd a[31:0] b[31:0] alufn0 res[31:0] n v z MA
+Xcomp alufn1 alufn2 n v z f comp
+Xbool alufn[3:0] a[31:0] b[31:0] boolout[31:0] bool32
+Xshi a[31:0] alufn[1:0] b[4:0] shi[31:0] shift
+
+Xchoose alufn4#32 alufn5#32  res[31:0] boolout[31:0] shi[31:0] 0#31 f F[31:0] mux4
+.ends
+
+*run the beta and plot
+
+Xbeta clk4 reset ia[31:0] id[31:0] ma[31:0] mrd[31:0] mwd[31:0] beta
+
+.tran 2900ns
+.plot clk4
+.plot ia[31:0]
+.plot id[31:0]
+.plot betaop(id[31:26])
+.plot ma[31:0]
+.plot mrd[31:0]
+.plot mwd[31:0]
+.plot b(id[20:16]) // register a
+.plot b(id[25:21]) // register c

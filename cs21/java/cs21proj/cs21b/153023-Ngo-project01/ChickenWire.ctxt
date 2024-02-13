@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=a\ b\ l\ g
+comment0.target=ChickenWire(double,\ double,\ double,\ double)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ JavaChicken\n\ \n\ This\ will\ set\ the\ position\ of\ the\ JavaChicken\ object\ based\ on\ the\ input,\ and\ will\ set\ up\ the\ \n\ chicken\ for\ drawing.\ (Size\ is\ not\ a\ parameter\ of\ this\ constructor\ since\ it\ will\ be\ complicated\ to\n\ adjust\ the\ size\ of\ the\ parts\ of\ the\ JavaChicken\ object.\ \n\ \n\ @param\ \ a\ \ \ x-coordinate\ of\ the\ chicken\ to\ be\ drawn\ (starts\ with\ the\ chicken's\ head)\n\ @param\ \ b\ \ \ y-coordinate\ of\ the\ chicken\n\ @param\ \ l\ \ \ length\ of\ the\ lines\ in\ the\ ChickenWire\ object\ (determines\ the\ second\ point\ of\ the\ line)\n\ @param\ \ g\ \ \ gap\ between\ the\ lines\ to\ be\ drawn\n\ \n
+comment1.params=g2d\ at
+comment1.target=void\ draw(java.awt.Graphics2D,\ java.awt.geom.AffineTransform)
+comment1.text=\n\ This\ will\ be\ the\ method\ that\ will\ draw\ the\ shape\ indicated\ in\ the\ class\ name.\ \n\ \n\ @param\ \ g2d\ \ \ Graphics2D\ that\ will\ draw\ the\ ChickenWire\ \n\ @param\ \ at\ \ \ \ AffineTransform\ that\ will\ draw\ the\ ChickenWire\ \n
+comment2.params=
+comment2.target=void\ animate()
+comment2.text=\n\ This\ method\ is\ left\ blank\ since\ this\ will\ not\ be\ animated.\ \n
+numComments=3

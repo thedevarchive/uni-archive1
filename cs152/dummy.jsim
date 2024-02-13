@@ -1,0 +1,49 @@
+
+.include "nominal.jsim"
+.include "stdcell.jsim"
+.include "8clocks.jsim"
+
+Wtest1 t nrz(0v,5.0v,10ns,0ns,.1ns,.1ns) 0 1
+Wtest2 b[7:0] nrz(0v,5.0v,10ns,0ns,.1ns,.1ns) 0 0xAF
+
+.subckt FA A B Ci S Co
+Xxor1 A B out1 xor2
+Xxor2 out1 Ci S xor2
+Xand1 A B out2 and2
+Xand2 A Ci out3 and2
+Xand3 Ci B out4 and2
+Xxor3 out2 out3 out4 Co or3
+.ends
+
+.subckt ADDER a0 a1 a2 a3 b0 b1 b2 b3 s0 s1 s2 s3 co ci
+* remember the node named ?0? is the ground node
+* nodes c0 through c3 are internal to the ADDER module
+Xbit0 a0 b0 ci s0 c0 FA
+Xbit1 a1 b1 c0 s1 c1 FA
+Xbit2 a2 b2 c1 s2 c2 FA
+Xbit3 a3 b3 c2 s3 co FA
+.ends
+
+X4adder1 a0 a1 a2 a3 b0 b1 b2 b3 s0 s1 s2 s3 co 0 ADDER
+X4adder2 a4 a5 a6 a7 b4 b5 b6 b7 s4 s5 s6 s7 cout co ADDER
+
+Xdff0 s0 clk4 muxIn0 dreg
+Xdff1 s1 clk4 muxIn1 dreg
+Xdff2 s2 clk4 muxIn2 dreg
+Xdff3 s3 clk4 muxIn3 dreg
+Xdff4 s4 clk4 muxIn4 dreg
+Xdff5 s5 clk4 muxIn5 dreg
+Xdff6 s6 clk4 muxIn6 dreg
+Xdff7 s7 clk4 muxIn7 dreg
+
+Xmux0 muxIn0 0 t a0 mux2
+Xmux1 muxIn1 0 t a1 mux2
+Xmux2 muxIn2 0 t a2 mux2
+Xmux3 muxIn3 0 t a3 mux2
+Xmux4 muxIn4 0 t a4 mux2
+Xmux5 muxIn5 0 t a5 mux2
+Xmux6 muxIn6 0 t a6 mux2
+Xmux7 muxIn7 0 t a7 mux2
+
+.tran 10000ns
+.plot s[7:0]

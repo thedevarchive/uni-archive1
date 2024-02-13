@@ -1,0 +1,113 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.Scanner;
+
+
+public class BTreeDB
+{
+  private static final String CMD_EXIT = "exit";
+  private static final String CMD_INSERT = "insert";
+  private static final String CMD_SELECT = "select";
+  private static final String CMD_UPDATE = "update";
+  private static final String STRING_BLANK = "";
+  private static final String ERROR_INVALID_COMMAND = "ERROR: invalid command";
+  private static BTreeManager btManager;
+  private static ValuesManager valManager;
+  
+  public BTreeDB() {}
+  
+  public static void main(String[] paramArrayOfString)
+    throws FileNotFoundException, IOException, InvalidCommandException
+  {
+    btManager = new BTreeManager(paramArrayOfString[0]);
+    valManager = new ValuesManager(paramArrayOfString[1]);
+    
+
+    Scanner localScanner = new Scanner(System.in);
+    while (localScanner.hasNext()) {
+      execute(localScanner.nextLine());
+    }
+  }
+  
+
+  public static void execute(String paramString)
+    throws IOException, InvalidCommandException
+  {
+    Scanner localScanner = new Scanner(paramString);
+    
+
+    String str1 = localScanner.next();
+    
+
+    if (str1.equals("exit")) {
+      btManager.close();
+      valManager.close();
+      System.exit(0);
+    }
+    else {
+      long l = localScanner.nextLong();
+      String str2 = localScanner.hasNext() ? localScanner.nextLine().trim() : "";
+      
+      if (str1.equals("insert")) {
+        insert(l, str2);
+      }
+      else if (str1.equals("update")) {
+        update(l, str2);
+      }
+      else if (str1.equals("select")) {
+        if (!str2.equals(""))
+          throw new InvalidCommandException();
+        select(l);
+      }
+      else {
+        throw new InvalidCommandException();
+      }
+    }
+  }
+  
+
+
+
+
+
+
+
+
+
+  public static void insert(long paramLong, String paramString)
+    throws IOException
+  {
+    if (btManager.containsKey(Long.valueOf(paramLong))) {
+      System.out.println("ERROR: " + paramLong + " already exists.");
+    }
+    else {
+      long l = valManager.insert(paramString);
+      
+      btManager.insert(paramLong, l);
+    }
+  }
+  
+  public static void select(long paramLong) throws IOException
+  {
+    Long localLong = Long.valueOf(btManager.getValueIndex(paramLong));
+    if (localLong.longValue() == -1L) {
+      System.out.println("ERROR: " + paramLong + " does not exist.");
+    } else {
+      String str = valManager.getValue(localLong.longValue());
+      System.out.println(paramLong + " => " + str);
+    }
+  }
+  
+  public static void update(long paramLong, String paramString)
+    throws IOException
+  {
+    Long localLong = Long.valueOf(btManager.getValueIndex(paramLong));
+    if (localLong.longValue() == -1L) {
+      System.out.println("ERROR: " + paramLong + " does not exist.");
+    } else {
+      valManager.updateValue(localLong.longValue(), paramString);
+      System.out.println(paramLong + " updated.");
+    }
+  }
+}

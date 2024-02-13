@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=w\ h
+comment0.target=PlayerFrame(int,\ int)
+comment1.params=
+comment1.target=void\ setUpGUI()
+comment2.params=
+comment2.target=void\ connectToServer()
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+numComments=4

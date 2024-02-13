@@ -1,0 +1,56 @@
+import java.util.Scanner;
+import java.util.Random;
+public class GDNTwo //guess da num two
+{
+	public static void main (String[] args)
+	{
+		boolean game = true;
+		System.out.println("Welcome to Guess Da Num 2!");
+		System.out.println("Give us a big number (the maximum number you can guess) and try to \"guess da");
+		System.out.println("num\" within that number!");
+		System.out.println("(Numbers below zero or negative don't count. You can also guess the big number you gave out)");
+		System.out.println("Enter a big number:");
+		while (game == true)
+		{
+			Random danum = new Random();
+			Scanner dunno = new Scanner (System.in);
+			Scanner woohoo =  new Scanner (System.in);
+			
+			int cap = dunno.nextInt();
+			int answer = danum.nextInt(cap);
+			int tries = 1;
+			System.out.println("Enter a number within 1-" + cap + ":");
+			int guess = 0;
+			while (guess != answer)
+			{	
+				System.out.println("Attempt number " + tries + ":");
+				guess = dunno.nextInt();
+				if (guess > cap || guess <= 0)
+				{
+					System.out.println("Guess within 1-" + cap + ".");
+				}
+				else if (guess < answer)
+				{
+					System.out.println("Higher.");
+				}
+				else if (guess > answer)
+				{
+					System.out.println("Lower.");
+				}
+				tries++;
+			}
+			System.out.println("You got it! You answered it in " + tries + " try/tries. Want to play again?");
+			String response;
+			response = woohoo.nextLine();
+			if (response.equalsIgnoreCase("yes"))
+			{
+				game = true; 
+			}
+			else			
+			{
+				game = false; 
+			}
+		}
+	}	
+}
+		

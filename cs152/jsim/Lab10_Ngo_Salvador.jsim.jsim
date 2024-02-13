@@ -1,0 +1,27 @@
+*I have not discussed the JSim language code in my program with anyone other than my instructor in this course.
+*I have not used JSim language code obtained from another student, or any unauthorized source, either modified or 
+*unmodified.
+*If any JSim language code or documentation used in my program was obtained from another source, 
+*such as a text book or course notes, that has been clearly noted with a proper citation in the comments of my 
+*program.
+
+.include "8clocks.jsim" 
+.include "nominal.jsim" 
+.include "stdcell.jsim" 
+
+*memory
+.subckt mem clk wr ma[31:0] mrd[31:0] mwd[31:0]
+
+Xdm
++vdd 0 0 ma[11:2] mrd[31:0] // read mem data
++0 clk wr ma[11:2] mwd[31:0] // write to main mem
++$memory width=32 nlocations=1024
++contents=(0xC01F0001 0xC03F0002 0x80400800)
+.ends
+
+Wa
+Wb
+Wc
+Wd
+
+Xdata clk wrr ma[31:0] mrd[31:0] mwd[31:0] mem

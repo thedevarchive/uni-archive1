@@ -1,0 +1,28 @@
+*I have not discussed the JSim language code in my program with anyone other than my instructor in this course.
+*I have not used JSim language code obtained from another student, or any unauthorized source, either modified or 
+*unmodified.
+*If any JSim language code or documentation used in my program was obtained from another source, 
+*such as a text book or course notes, that has been clearly noted with a proper citation in the comments of my 
+*program.
+
+
+*4 INPUT NAND
+.include "8clocks.jsim"
+.include "nominal.jsim"
+
+MP1 vdd clk1 out vdd PENH W=1u L=1u
+MP2 vdd clk2 out vdd PENH W=1u L=1u
+MP3 vdd clk3 out vdd PENH W=1u L=1u
+MP4 vdd clk4 out vdd PENH W=1u L=1u
+
+MN1 out clk1 a 0 NENH W=1u L=1u
+MN2 a clk2 b 0 NENH W=1u L=1u
+MN3 b clk3 c 0 NENH W=1u L=1u
+MN4 c clk4 0 0 NENH W=1u L=1u 
+
+.tran 100ns
+.plot clk1 
+.plot clk2 
+.plot clk3
+.plot clk4
+.plot out

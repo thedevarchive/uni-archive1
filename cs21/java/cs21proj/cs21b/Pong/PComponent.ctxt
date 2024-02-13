@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.params=cp\ s\ dis\ dos\ id
+comment0.target=PComponent(java.awt.Container,\ java.net.Socket,\ java.io.DataInputStream,\ java.io.DataOutputStream,\ int)
+comment0.text=\n\ Constructor\ for\ PComponent\n\ \n\ @param\ \ cp\ \ \ the\ content\ pane\ of\ the\ GUI\n\ @param\ \ s\ \ \ \ the\ socket\ of\ the\ client\n\ @param\ \ dis\ \ the\ DataInputStream\ to\ be\ used\ to\ receive\ data\n\ @param\ \ dos\ \ the\ DataOutputStream\ to\ be\ used\ to\ get\ data\n\ @param\ \ id\ \ \ the\ ID\ of\ the\ player\ (whether\ they\ are\ player\ 1\ or\ 2)\n
+comment1.params=g
+comment1.target=void\ paintComponent(java.awt.Graphics)
+comment1.text=\n\ Draws\ the\ graphics\ of\ the\ game.\ Where\ most\ of\ the\ game\ happens.\ \n\ \n\ @param\ \ g\ \ \ the\ Graphics\ used\ to\ draw\ the\ game\ and\ the\ sprites\n
+comment2.params=
+comment2.target=void\ setUpRepaintTimer()
+comment2.text=\n\ Creates\ \ a\ repaint\ timer\ that\ would\ redraw\ the\ game\ and\ sprites\ over\ and\ over\ to\ animate\ the\ game.\ \n\ This\ also\ handles\ the\ collision\n
+comment3.params=ae
+comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment4.params=
+comment4.target=void\ run()
+comment5.params=
+comment5.target=void\ setUpKL()
+comment5.text=\n\ Activates\ the\ KeyListeners,\ which\ has\ the\ controls\ of\ the\ game.\ \n
+comment6.params=ke
+comment6.target=void\ keyTyped(java.awt.event.KeyEvent)
+comment7.params=ke
+comment7.target=void\ keyPressed(java.awt.event.KeyEvent)
+comment8.params=ke
+comment8.target=void\ keyReleased(java.awt.event.KeyEvent)
+comment9.params=
+comment9.target=void\ startThreads()
+comment9.text=\n\ startThreads\ triggers\ the\ activation\ of\ the\ threads\ for\ the\ communication\ to\ the\ server.\ \n
+numComments=10

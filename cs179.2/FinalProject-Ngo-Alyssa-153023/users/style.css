@@ -1,0 +1,71 @@
+body
+{
+    background-color: deepskyblue; 
+    font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
+}
+
+nav.navbar
+{
+  background-color: skyblue; 
+}
+
+nav.navbar ul {
+  margin: 0 -2%; 
+  padding: 0 3%; 
+}
+
+nav.navbar li {
+  display: inline-block;
+  margin: 0 1em; 
+}
+
+nav.navbar p 
+{
+  text-decoration: none; 
+  color: black; 
+  display: block; 
+  padding: 0.25em; 
+}
+
+main
+{
+  margin: 0 15%; 
+}
+
+nav.breadcrumb {
+  padding: 0.8em 1em;
+  border: 1px solid hsl(0, 0%, 90%);
+  border-radius: 4px;
+  background: mediumseagreen;
+  clear: both; 
+}
+
+nav.breadcrumb ol {
+  margin: 0;
+  padding: 0; 
+  list-style: none;
+}
+
+nav.breadcrumb li {
+  display: inline;
+}
+
+nav.breadcrumb li + li::before {
+  display: inline-block;
+  margin: 0 .25em;
+  transform: rotate(15deg);
+  border-right: .1em solid black;
+  height: .8em;
+  content: '';
+}
+
+nav.breadcrumb [aria-current="page"] {
+  color: #000;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:visited 
+{
+    color: lightpink;  
+}

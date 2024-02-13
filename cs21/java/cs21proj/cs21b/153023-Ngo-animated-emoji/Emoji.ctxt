@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=a\ b\ s\ r\ e
+comment0.target=Emoji(double,\ double,\ double,\ double,\ java.awt.Color)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Emoji\n
+comment1.params=g2d\ reset
+comment1.target=void\ drawEmoji(java.awt.Graphics2D,\ java.awt.geom.AffineTransform)
+comment1.text=\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\n\ \n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \n
+comment2.params=a
+comment2.target=void\ incX(double)
+comment3.params=b
+comment3.target=void\ incY(double)
+comment4.params=c
+comment4.target=void\ incSz(double)
+comment5.params=
+comment5.target=void\ clockwise()
+comment6.params=
+comment6.target=void\ counter()
+numComments=7

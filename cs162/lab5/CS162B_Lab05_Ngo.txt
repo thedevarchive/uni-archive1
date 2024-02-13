@@ -1,0 +1,18 @@
+This program calculates the Manhattan distance (taxicab metric) of 3D points. To use this program, run CS162B_Lab05_Ngo by double-clicking on the executable file or type the file name in the command prompt of the folder it is in. 
+
+HOW TO USE: 
+First, enter the number of cases, or how many times you want to enter a set of points. Next, enter the number of coordinates you will enter for one case. Then, enter the coordinates. Do this until all cases are used up. 
+
+A sample format is written below: 
+
+3
+2
+1 2 3
+4 5 6
+3
+0 0 0 
+1 1 1
+2 3 4
+2
+8 13 19
+3 4 5

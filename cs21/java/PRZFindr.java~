@@ -1,0 +1,144 @@
+import java.util.*;
+public class PRZFindr
+{
+	public static void main (String[] args)
+	{
+		System.out.println("Enter the polynomial's last term coefficient.");
+		Scanner B = new Scanner (System.in);
+		int p = B.nextInt();
+		int k = 1;
+		int arraySyz = 0;
+		int factr;
+		while (k <= p)
+		{
+			factr = p % k;
+			if (factr == 0)
+			{
+				arraySyz++;
+			}
+			k++;
+		}
+		int storageA = arraySyz * 2;
+		int[] pFactrs = new int [storageA];
+		k = 1;
+		int keepr = 0;
+		while (k <= p)
+		{
+			factr = p % k;
+			if (factr == 0)
+			{
+				pFactrs[keepr] = k;
+				keepr++;
+				pFactrs[keepr] = k * -1;
+				keepr++;
+			}
+			k++;
+		}
+		System.out.println("Enter the polynomial's first term coefficient.");
+		Scanner F = new Scanner (System.in);
+		int q = F.nextInt();
+		k = 1;
+		arraySyz = 0;
+		while (k <= q)
+		{
+			factr = q % k;
+			if (factr == 0)
+			{
+				arraySyz++;
+			}
+			k++;
+		}
+		int storageB = arraySyz * 2;
+		int[] qFactrs = new int [storageB];
+		k = 1;
+		keepr = 0;
+		while (k <= q)
+		{
+			factr = q % k;
+			if (factr == 0)
+			{
+				qFactrs[keepr] = k;
+				keepr++;
+				qFactrs[keepr] = k * -1;
+				keepr++;
+			}
+			k++;
+		}
+		keepr = 0;
+		System.out.print("p: ");
+		while (keepr < storageA)
+		{
+			System.out.print(pFactrs[keepr] + " ");
+			keepr++;
+		}
+		System.out.println("");
+		System.out.println("");
+		keepr = 0;
+		System.out.print("q: ");
+		while (keepr < storageB)
+		{
+			System.out.print(qFactrs[keepr] + " ");
+			keepr++;
+		}
+		System.out.println("");
+		System.out.println("");
+		keepr = 0;
+		int j = 0;
+		arraySyz = 0;
+		while (j < storageB)
+		{
+			while (keepr < storageA)
+			{
+				arraySyz++;
+				keepr++;
+			}
+			j += 2;
+			keepr = 0;
+		}
+		int storageC = arraySyz;
+		String[] pq = new String [storageC];
+		keepr = 0;
+		j = 0;
+		int lokr = 0;
+		while (j < storageB)
+		{
+			while (keepr < storageA)
+			{
+				int PRZ = pFactrs[keepr] % qFactrs[j];
+				String fin;
+				int dvidr;
+				if (PRZ == 0)
+				{
+					dvidr = pFactrs[keepr] / qFactrs[j];
+					fin = "" + dvidr;
+					pq [lokr] = fin;
+				}
+				else
+				{
+					fin = pFactrs[keepr] + "/" + qFactrs[j];
+					pq[lokr] = fin;
+				}
+				keepr++;
+				lokr++;
+			}
+			j += 2;
+			keepr = 0;
+		}
+		System.out.print("p/q: ");
+		int chekr = 0;
+		lokr = 0;
+		//while (lokr < storageC)
+		//{
+			while (chekr < storageC)
+			{
+				if (!pq[lokr].equals(pq[chekr]))
+				{
+					System.out.print(pq[chekr] + " ");
+				}
+			chekr++;
+			}
+			//chekr = 0;
+			//lokr++;
+		//}
+	}
+}

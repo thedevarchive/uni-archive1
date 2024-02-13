@@ -1,0 +1,32 @@
+|I have not discussed the BSim language code in my program with anyone other than my instructor in this course.
+|I have not used BSim language code obtained from another student, or any unauthorized source, either modified or 
+|unmodified.
+|If any BSim language code or documentation used in my program was obtained from another source, 
+|such as a text book or course notes, that has been clearly noted with a proper citation in the comments of my 
+|program.
+ 
+.include beta.uasm
+
+| take two numbers and divide it by int L (determines the number of data/ints) 
+.macro MEAN(RA, RB, L, RC) {
+ADD(RA, RB, RC) 
+DIVC(RC, L, RC) 
+}
+
+LD(X, R0) 
+LD(Y, R1) 
+LD(Z, R2) 
+
+|compute avg. of two numbers and store to R8
+MEAN(R0, R1, 2, R8) 
+|multiply answer back by 2
+MULC(R8, 2, R9) 
+|compute avg. of 3 numbers and store to R10
+MEAN(R2, R9, 3, R10)
+
+. = 0x200
+X: LONG(1) 
+Y: LONG(3) 
+Z: LONG(5)
+A: LONG(R3) 
+B: LONG(R5) 

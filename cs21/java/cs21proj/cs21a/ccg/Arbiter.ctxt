@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.params=a\ b
+comment0.target=Arbiter(Player,\ Player)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Arbiter\n
+comment1.params=
+comment1.target=void\ shuffleDeck()
+comment10.params=
+comment10.target=boolean\ hasWinner()
+comment2.params=
+comment2.target=void\ assembleDeck()
+comment3.params=
+comment3.target=void\ assembleNewDeck()
+comment4.params=
+comment4.target=java.lang.String\ dealCard()
+comment5.params=action
+comment5.target=java.lang.String\ play(java.lang.String)
+comment6.params=inPlay\ target
+comment6.target=java.lang.String\ dealDamage(Card,\ Card)
+comment7.params=type1\ type2
+comment7.target=boolean\ checkResistance(java.lang.String,\ java.lang.String)
+comment8.params=type1\ type2
+comment8.target=boolean\ checkWeakness(java.lang.String,\ java.lang.String)
+comment9.params=
+comment9.target=java.lang.String\ gameReport()
+numComments=11

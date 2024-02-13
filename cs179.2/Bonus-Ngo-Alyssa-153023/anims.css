@@ -1,0 +1,146 @@
+html
+{
+   overflow: hidden;
+}
+
+.sky
+{
+  width: max; 
+  height: 75vh; 
+  background: skyblue;
+}
+
+.land
+{
+  width: max; 
+  height: 25vh; 
+  background: bisque; 
+}
+
+/*sun and triangle shape from
+https://css-tricks.com/the-shapes-of-css/*/
+ .sun {
+      background: yellow;
+      width: 80px;
+      height: 80px;
+      top: 50px; 
+      float: right; 
+      right: 50px; 
+      position: absolute;
+      text-align: center;
+      animation: rotateInPlace 3s linear infinite;
+    }
+    .sun:before,
+    .sun:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 80px;
+      width: 80px;
+      background: yellow;
+    }
+    .sun:before {
+      transform: rotate(30deg);
+    }
+    .sun:after {
+      transform: rotate(60deg);
+    }
+
+
+#triangle-topright {
+      width: 0;
+      height: 0;
+      border-top: 150px solid red;
+      border-left: 150px solid transparent;
+  position: absolute;
+  right: 10em; 
+  top: 60vh; 
+    }
+
+.stick{
+    position: absolute;
+      width: 10px;
+      height: 200px;
+  right: 16em; 
+  top: 60vh; 
+  background-color: brown; 
+  transform: rotate(45deg); 
+}
+
+.wave
+{
+  position: absolute;
+  width: 20%;
+  height: 60%;
+  top: 70%;
+  background-color: blue;
+  border-radius: 100%;
+}
+
+.wave1 {
+  left: 0%;
+  animation: rotate 15s linear infinite;
+}
+
+.wave2 {
+  left: 3%;
+  animation: rotate 10s linear infinite;
+}
+
+.wave3 {
+  left: 7%;
+  animation: rotate 7s linear infinite;
+}
+.water
+{
+  width: 500px; 
+  height: 25vh;
+  background: blue; 
+}
+
+.text
+{
+  /*display: none; */
+  text-align: center; 
+  font-size: 5rem;
+  position: absolute;
+  left: 5%;
+  bottom: 25%;
+  animation:
+        slideUp 0.75s .5s cubic-bezier(0.17,.88,.32,1.27) both,
+        fadeIn .25s .5s ease-in both;
+}
+
+  
+
+/*text animation from https://codepen.io/amberweinberg/pen/YqadmE*/
+
+@keyframes slideUp {
+    from {transform: translateY(200%);}
+    to {transform:translateY(-50%);}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes move {
+  0%
+  {
+    transform: rotate(180deg) translate(0); 
+  }
+  50%
+  {
+    transform: translate(1100px); 
+  }
+}
+
+@keyframes rotate {
+  100% { transform: rotate(360deg) translate(100px);}
+}
+
+@keyframes rotateInPlace {
+  100% { transform: rotate(360deg);}
+}

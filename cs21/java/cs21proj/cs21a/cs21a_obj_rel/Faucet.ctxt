@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=w
+comment0.target=Faucet(WaterTank)
+comment1.params=w
+comment1.target=void\ connect(WaterTank)
+comment2.params=amt
+comment2.target=void\ dispense(double)
+comment3.params=
+comment3.target=void\ flush()
+numComments=4

@@ -1,0 +1,261 @@
+<!--
+<html>
+	<head>
+		<script type="text/javascript">
+			function display() {
+				//get user input
+				var input = document.getElementById('input').value; 
+				
+				//display result 
+				alert("You entered: " + input); 
+				}
+		</script>
+	</head>
+	<body>
+	
+	Enter: <input id="input" name="input">
+	<br><br>
+	
+	<! click the button, call the javascript function display()>
+	<button type="button" onclick="display();">
+	
+	Click me to display your input</button>
+	<br><br>
+	
+	</body>
+</html>
+-->
+
+<!--
+<html>
+	<head>
+		<script type="text/javascript">
+			function calcResult() {
+				var y = 5; 
+				var x = y + 2; 
+				
+				// display result
+				document.getElementById("result").innerHTML = x; 
+			}
+		</script>
+	<head>
+	
+	<body>
+	<p>y equals 5, calculate x = y + 2, and display x:</p>
+	
+	<button onclick="calcResult()">Try it</button>
+	<br/><br/>
+	
+	Result: <p id="result"> </p>
+	
+	</body>
+</html>
+-->
+
+
+<html>
+	<head> 
+		<script type="text/javascript">
+			function displayA() {
+				//get user input
+				var price = 10; 
+				var mult = document.getElementById('multA').value; 
+				var x = price * mult; 
+				// display result
+				document.getElementById("resultA").innerHTML = x; 
+			}
+			function displayB() {
+				//get user input
+				var price = 15; 
+				var mult = document.getElementById('multB').value; 
+				var x = price * mult;
+				
+				// display result
+				document.getElementById("resultB").innerHTML = x; 
+			}
+			function displayC() {
+				//get user input
+				var price = 20; 
+				var mult = document.getElementById('multC').value; 
+				var x = price * mult;
+
+				// display result
+				document.getElementById("resultC").innerHTML = x; 
+			}
+			function total() {
+				var mult = document.getElementById('multA').value; 
+				var mult1 = document.getElementById('multB').value;
+				var mult2 = document.getElementById('multC').value;
+				var tot = mult * 1 + mult1 * 1 + mult2 * 1; 
+
+				document.getElementById("total").innerHTML = tot;
+			}
+			function payment(){
+				var tot = document.getElementById('multA').value; 
+				var tot1 = document.getElementById('multB').value;
+				var tot2 = document.getElementById('multC').value; 
+				var sum = tot * 10 + tot1 * 15 + tot2 * 20; 
+
+				document.getElementById("totalPrice").innerHTML = sum; 
+			}
+			function processAll()
+			{
+				document.getElementById("hiddenA").value = (document.getElementById("resultA").innerHTML);
+				document.getElementById("hiddenB").value = (document.getElementById("resultB").innerHTML);
+				document.getElementById("hiddenC").value = (document.getElementById("resultC").innerHTML);
+				document.getElementById("hiddenTot").value = (document.getElementById("total").innerHTML);
+				document.getElementById("hiddenTP").value = (document.getElementById("totalPrice").innerHTML);
+			}
+			function updateAll()
+			{
+				displayA(); 
+				displayB(); 
+				displayC();
+				total(); 
+				payment(); 
+				processAll();
+			}
+		</script>
+	</head>
+	
+	<body>
+	<FORM ACTION="b.php" method="POST">
+		<table style="width:25%">
+			<tr>
+				<th>Products</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Subtotal</th>
+			</tr>
+			<tr>
+				<td>Product A</td>
+				<td>$10</td>
+				<td><input id="multA" name="multA"></td>
+				<td><input type="hidden" name="hiddenA" id="hiddenA" value="0"/><center><p id="resultA">0</p></center></td>
+			</tr>
+			<tr>
+				<td>Product B</td>
+				<td>$15</td>
+				<td><input id="multB" name="multB"></td>
+				<td><input type="hidden" name="hiddenB" id="hiddenB" value="0"/><center><p id="resultB">0</p></center></td>
+			</tr>
+			<tr>
+				<td>Product C</td>
+				<td>$20</td>
+				<td><input id="multC" name="multC"></td>
+				<td><input type="hidden" name="hiddenC" id="hiddenC" value="0"/><center><p id="resultC">0</p></center></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Total</td>
+				<td><input type="hidden" name="hiddenTot" id="hiddenTot" value="0"/><center><p id="total">0</p></center></td>
+				<td><input type="hidden" name="hiddenTP" id="hiddenTP" value="0"/><center><p id="totalPrice">0</p></center></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td><button type="button" onClick="updateAll()">Update</button></td>
+				<td><button type="submit">Submit</button></td>
+			</tr>
+	</FORM>
+	</body>
+</html>
+
+<!--
+<html>
+	<head> 
+		<script type="text/javascript">
+			function displayA() {
+				//get user input
+				var price = 10; 
+				var mult = document.getElementById('multA').value; 
+				var x = price * mult; 
+				// display result
+				document.getElementById("resultA").innerHTML = x; 
+			}
+			function displayB() {
+				//get user input
+				var price = 15; 
+				var mult = document.getElementById('multB').value; 
+				var x = price * mult;
+				
+				// display result
+				document.getElementById("resultB").innerHTML = x; 
+			}
+			function displayC() {
+				//get user input
+				var price = 20; 
+				var mult = document.getElementById('multC').value; 
+				var x = price * mult;
+
+				// display result
+				document.getElementById("resultC").innerHTML = x; 
+			}
+			function total() {
+				var mult = document.getElementById('multA').value; 
+				var mult1 = document.getElementById('multB').value;
+				var mult2 = document.getElementById('multC').value;
+				var tot = mult * 1 + mult1 * 1 + mult2 * 1; 
+
+				document.getElementById("total").innerHTML = tot;
+			}
+			function payment(){
+				var tot = document.getElementById('multA').value; 
+				var tot1 = document.getElementById('multB').value;
+				var tot2 = document.getElementById('multC').value; 
+				var sum = tot * 10 + tot1 * 15 + tot2 * 20; 
+
+				document.getElementById("totalPrice").innerHTML = sum; 
+			}
+			function updateAll()
+			{
+				displayA(); 
+				displayB(); 
+				displayC();
+				total(); 
+				payment(); 
+			}
+		</script>
+	</head>
+
+	<body>
+		<table style="width:25%">
+			<tr>
+				<th>Products</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Subtotal</th>
+			</tr>
+			<tr>
+				<td>Product A</td>
+				<td>$10</td>
+				<td><input type="number" id="multA" name="multA" onkeyup="updateAll()"></td>
+				<td><center><p id="resultA">0</p></center></td>
+			</tr>
+			<tr>
+				<td>Product B</td>
+				<td>$15</td>
+				<td><input type="number" id="multB" name="multB" onkeyup="updateAll()"></td>
+				<td><center><p id="resultB">0</p></center></td>
+			</tr>
+			<tr>
+				<td>Product C</td>
+				<td>$20</td>
+				<td><input type="number" id="multC" name="multC" onkeyup="updateAll()"></td>
+				<td><center><p id="resultC">0</p></center></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Total</td>
+				<td><center><p id="total">0</p></center></td>
+				<td><center><p id="totalPrice">0</p></center></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><button type="button">Submit</button></td>
+			</tr>
+	</body>
+</html>
+-->

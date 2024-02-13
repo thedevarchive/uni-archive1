@@ -1,0 +1,116 @@
+*I have not discussed the JSim language code in my program with anyone other than my instructor in this course.
+*I have not used JSim language code obtained from another student, or any unauthorized source, either modified or 
+*unmodified.
+*If any JSim language code or documentation used in my program was obtained from another source, 
+*such as a text book or course notes, that has been clearly noted with a proper citation in the comments of my 
+*program.
+
+.include "stdcell.jsim" 
+
+.subckt FA a b cin s cout
+Xxor1 a b q xor2
+Xxor2 q cin s xor2
+Xand1 q cin r and2
+Xand2 a b t and2
+Xor r t cout or2
+.ends
+
+*The rules for detecting overflow in a two's complement sum are simple:
+*If the sum of two positive numbers yields a negative result, the sum has overflowed.
+*If the sum of two negative numbers yields a positive result, the sum has overflowed.
+*Taken from http://sandbox.mc.edu/~bennet/cs110/tc/orules.html
+
+.subckt hasOverflow a b s v
+Xinv1 a na inverter
+Xinv2 b nb inverter
+Xinv3 s ns inverter
+Xand1 a b ns first and3
+Xand2 na nb s second and3
+Xor first second v or2
+.ends
+
+.subckt isAllZero s[31:0] z
+Xor1 s[31:0:4] s[30:0:4] s[29:0:4] s[28:0:4] o[7:0] or4
+XorA o[7:4]  oA or4
+XorB o[3:0]  oB or4
+XorZ oA oB oAB or2
+Xinv oAB z inverter
+.ends
+
+*MA = modified adder
+.subckt MA a[31:0] b[31:0] oper f[31:0] n v z
+Xflip b[31:0] oper#32 inv[31:0] xor2
+Xfirst a[0] inv[0] oper f[0] cout[0] FA
+Xnext a[1:31] inv[1:31] cout[0:30] f[1:31] cout[1:31] FA
+
+.connect f[31] n 
+Xof a[31] inv[31] f[31] v hasOverflow
+Xzero f[31:0] z isAllZero
+.ends
+
+*op1 checks if a = b when op1 is high
+*op2 checks if a < b when op2 is high
+*equal will be high when op1 is high (user enables equal check) 
+*and the result between a and b is zero (z is high)
+*less will be high when either there is overflow or sum is negative 
+*(cannot be both because two large positive numbers added together should not be negative in actual math)
+*less should also have op2 on high (user enables less than check) 
+*If op1 and op2 are both high, comparator will check if a <= b
+
+.subckt comp op1 op2 n v z out
+Xand1 op1 z equal and2
+Xxor n v l xor2
+Xand2 op2 l less and2
+Xand3 equal less eorl and2
+Xor equal less eorl out or3
+.ends
+
+.subckt bool ALUFN[0:3] a b out
+Xmux a b ALUFN0 ALUFN1 ALUFN2 ALUFN3 out mux4
+.ends
+
+.subckt bool32 ALUFN[3:0] a[31:0] b[31:0] bout[31:0]
+Xmux32 ALUFN0#32 ALUFN1#32 ALUFN2#32 ALUFN3#32 a[31:0] b[31:0] bout[31:0] bool
+.ends
+
+.subckt shift a[31:0] op[1:0] b[4:0] fin[31:0] 
+Xrev op0 a[31:0] aa[31:0] reverser
+Xsign op1 a31 f and2
+Xmux B4#32 aa[31:0] aa[15:0] f#16 w[31:0] mux2
+Xmux2 B3#32 w[31:0] w[23:0] f#8 x[31:0] mux2
+Xmux3  B2#32 x[31:0] x[27:0] f#4 y[31:0] mux2
+Xmux4  B1#32 y[31:0] y[29:0] f#2 z[31:0] mux2
+Xfin B0#32 z[31:0] z[30:0] f s[31:0] mux2
+Xrev2 op0 s[31:0] fin[31:0] reverser
+.ends
+
+*reverser swaps the positions of the binary digits
+*a31 swaps with a0, a30 swaps with a1, etc. 
+*the switch will occur when op0 = 1 (indicator of right shift) 
+*if op0 = 0, output will retain the original digit positions
+
+.subckt reverser op0 a[31:0] aa[31:0]
+Xswitch op0#32 a[31:0] a[0:31] aa[31:0] mux2
+.ends
+
+.subckt ALU a[31:0] b[31:0] alufn[5:0] f[31:0] 
+Xadd a[31:0] b[31:0] alufn0 res[31:0] n v z MA
+Xcomp alufn1 alufn2 n v z f comp
+Xbool alufn[3:0] a[31:0] b[31:0] boolout[31:0] bool32
+Xshi a[31:0] alufn[1:0] b[4:0] shi[31:0] shift
+
+Xchoose alufn4#32 alufn5#32  res[31:0] boolout[31:0] shi[31:0] 0#31 f F[31:0] mux4
+.ends
+
+Wtest a[31:0] nrz(0, 5, 35ns, 5ns, 0.1ns, 0.1ns) 123 4 3 0x00000002 0x10000000
+Wtest2 b[31:0] nrz(0, 5, 35ns, 5ns, 0.1ns, 0.1ns) 456 2 3 0x00002002 9
+Wtest3 alufn[5:0] nrz(0, 5, 35ns, 5ns, 0.1ns, 0.1ns) 0b000000 0b000001 0x33 0b011000 0b100011
+
+Xtest A[31:0] B[31:0] alufn[5:0] out[31:0] ALU
+
+.tran 200ns
+.plot a[31:0]
+.plot b[31:0]
+.plot b(alufn[5:0])
+.plot out[31:0] 
+.plot b(out[31:0])

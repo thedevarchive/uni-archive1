@@ -1,0 +1,23 @@
+
+.include "nominal.jsim"
+.include "8clocks.jsim"
+
+MP1 vdd nclk1 x vdd PENH W=1u L=1u 
+MP2 vdd clk2 x vdd PENH W=1u L=1u
+MN1 x nclk1 a 0 NENH W=1u L=1u
+MN2 a clk2 0 0 NENH W=1u L=1u
+
+MP3 vdd clk1 y vdd PENH W=1u L=1u
+MP4 vdd nclk2 y vdd PENH W=1u L=1u
+MN3 y clk1 b 0 NENH W=1u L=1u 
+MN4 b nclk2 0 0 NENH W=1u L=1u 
+
+MP5 vdd x out vdd PENH W=1u L=1u 
+MP6 vdd y out vdd PENH W=1u L=1u
+MN5 out x c 0 NENH W=1u L=1u 
+MN6 c y 0 0 NENH W=1u L=1u 
+
+.tran 100ns
+.plot x
+.plot y
+.plot out
